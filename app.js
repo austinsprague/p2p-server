@@ -7,7 +7,13 @@ var bodyParser = require('body-parser');
 var knex = require('./db/knex');
 // var rp = require('request-promise');
 // var cors = require('cors');
+
+// ________Paypal
+var PayPalStrategy = require('passport-paypal-oauth').Strategy;
+var passport = require('passport');
+
 require('dotenv').load();
+
 
 
 var app = express();
@@ -19,6 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 // app.use(cors());
 
 // app.use('/', routes);
@@ -27,6 +34,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 // // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// ________Paypal
+passport.use(new PayPalStrategy({
+    clientID: PAYPAL_APP_ID,
+    clientSecret: PAYPAL_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/paypal/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ paypalId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
+app.get('/auth/paypal',
+  passport.authenticate('paypal'));
+
+app.get('/auth/paypal/callback',
+  passport.authenticate('paypal', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
