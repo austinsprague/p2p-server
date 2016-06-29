@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var knex = require('./db/knex');
 // var rp = require('request-promise');
 // var cors = require('cors');
-// require('dotenv').load();
+require('dotenv').load();
 
 
 var app = express();
