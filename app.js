@@ -8,6 +8,7 @@ var knex = require('./db/knex');
 // var rp = require('request-promise');
 var cors = require('cors');
 require('dotenv').load();
+var braintree = require("braintree");
 
 
 var app = express();
@@ -29,6 +30,32 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+var gateway = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: process.env.merchantId,
+  publicKey: process.env.publicKey,
+  privateKey: process.env.privateKey
+});
+app.get("/client_token", function (req, res) {
+  gateway.clientToken.generate({}, function (err, response) {
+    res.send(response.clientToken);
+  });
+});
+
+app.post("/checkout", function (req, res) {
+  var nonceFromTheClient = req.body.payment_method_nonce;
+  // Use payment method nonce here
+});
+
+gateway.transaction.sale({
+  amount: "10.00",
+  paymentMethodNonce: "fake-valid-nonce",
+  options: {
+    submitForSettlement: true
+  }
+}, function (err, result) {
+});
+
 // error handlers
 
 // development error handler
@@ -36,10 +63,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.json('error', {
-      message: err.message,
-      error: err
-    });
+    // res.status(status).json(obj)
   });
 }
 
@@ -47,10 +71,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.json('error', {
-    message: err.message,
-    error: {}
-  });
+  // res.status(status).json(obj)
 });
 
 

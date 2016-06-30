@@ -3,3 +3,4 @@ node_modules
 ‘.DS-Store’
 ‘.DS-Store’
 ‘/*.env’
+.env
