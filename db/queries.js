@@ -12,6 +12,13 @@ function UserProjBacked() {
   return knex('user-proj-backed');
 }
 
+function UserProjects() {
+  Users().select().then(function(user){
+    
+  })
+}
+
+
 module.exports= {
   Users,
   Projects,
