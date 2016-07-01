@@ -13,14 +13,13 @@ function UserProjBacked() {
 }
 
 function UserProjects() {
-  Users().select().then(function(user){
-    
-  })
+  return Users().select().join('projects', 'projects.user_id', 'users.id').orderBy('projects.id').as('project_id');
 }
 
 
 module.exports= {
   Users,
   Projects,
-  UserProjBacked
+  UserProjBacked,
+  UserProjects
 };
