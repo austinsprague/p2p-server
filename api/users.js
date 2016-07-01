@@ -12,7 +12,16 @@ router.get('/', function (req, res) {
 
 router.post('/', function(req, res){
   queries.Users().insert({
-    
+    name: 'Betty',
+    address: '111 Pine St, SF CA',
+    phone_num: 2069991123,
+    background: 'Ultimate baking champion',
+    username: 'betty_shop',
+    password: '123456',
+    credit_card: 1111222333444,
+    cvv: 123,
+    exp: 0219,
+    zip: 99999
   }).then(function(){
     res.json('success');
   }).catch(function(err){
