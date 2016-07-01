@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 router.post('/', function(req, res){
   queries.Projects().insert({
     company_name: 'Betty\'s Bakeshop',
-    user_id: 1,
+    user_id: 3,
     img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
     desc: 'Making delious cupcakes all the time!',
     pitch:'Need more trucks to fill the bellies of people wherever they are!',
