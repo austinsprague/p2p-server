@@ -2,7 +2,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('projects', function(table) {
     table.increments();
     table.string('company_name');
-    table.integer('user_id')
+    table.integer('user_id');
     table.text('img_url');
     table.text('desc');
     table.text('pitch');
