@@ -8,7 +8,6 @@ var knex = require('./db/knex');
 // var rp = require('request-promise');
 var cors = require('cors');
 require('dotenv').load();
-var braintree = require("braintree");
 
 
 var app = express();
