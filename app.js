@@ -40,16 +40,16 @@ passport.use(new StripeStrategy({
   function(accessToken, refreshToken, stripe_properties, done) {
     // User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
     //   function (err, user) {
-      return done(null, { stripeId: stripe_properties}
-      );
+      console.log(accessToken);
+      done(null, { stripeId: stripe_properties.stripe_user_id});
     // });
   }
 ));
 
 app.get('/auth/stripe', passport.authenticate('stripe'));
 app.get('/auth/stripe/callback',
-  passport.authenticate('stripe', { failureRedirect: '/login'}),
-  function(req, res) { res.redirect('/') }
+  passport.authenticate('stripe', { failureRedirect: '/api/users'}),
+  function(req, res) { res.redirect('http://localhost:3000/#/home') }
 )
 
 
