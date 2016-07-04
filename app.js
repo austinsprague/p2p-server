@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -11,41 +12,45 @@ var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
 require('dotenv').load();
 
-
-var app = express();
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cors());
 app.use('/api', require('./api'));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user)
+});
 
 passport.use(new StripeStrategy({
     clientID: process.env.STRIPE_ID,
     clientSecret: process.env.STRIPE_SECRET,
-    callbackURL: "http://localhost:3000/auth/stripe/callback"
+    callbackURL: "http://localhost:5000/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
-    User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
-      function (err, user) {
-      return done(err, user);
-    });
+    // User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
+    //   function (err, user) {
+      return done(null, { stripeId: stripe_properties}
+      );
+    // });
   }
 ));
 
-app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
+app.get('/auth/stripe', passport.authenticate('stripe'));
 app.get('/auth/stripe/callback',
-  passport.authenticate('stripe', {failureRedirect: '/login'}),
-  function(req, res) {
-    res.redirect('/')
-  }
+  passport.authenticate('stripe', { failureRedirect: '/login'}),
+  function(req, res) { res.redirect('/') }
 )
-
-
 
 
 // catch 404 and forward to error handler

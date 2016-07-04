@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
-var schema = require('../models/user')
 
 // router.get('/', function (req, res) {
 //   queries.Users().then(function(data){
@@ -11,32 +10,6 @@ var schema = require('../models/user')
 //   });
 // });
 
-
-router.get('/', function (req, res) {
-    res.json({message: req.flash('loginMessage')});
-});
-
-router.get('/login', function(req, res) {
-  // console.log(queries.Users().then);
-  res.json(queries.Users());
-});
-
-router.get('/profile', isLoggedIn, function(req, res) {
-  res.json('profile get');
-});
-
-router.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-})
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    res.redirect('/');
-  }
-}
 
 router.post('/', function(req, res){
   queries.Users().insert({
