@@ -1,5 +1,13 @@
 var knex = require('./knex')
 
+// function UserById(){
+//   return knex('users').where({id: req.params.id});
+// }
+function UserProjectsById(){
+  return knex('users').where({id: req.params.id}).first().then(function(user) {
+    console.log(user);
+  });
+}
 function Users(){
   return knex('users');
 }
@@ -13,7 +21,7 @@ function UserProjBacked() {
 }
 
 function UserProjects() {
-  return Users().select().join('projects', 'projects.user_id', 'users.id').orderBy('projects.id').as('project_id');
+  return Users().select().join('projects', 'projects.user_id', 'users.id');
 }
 
 
@@ -21,5 +29,6 @@ module.exports= {
   Users,
   Projects,
   UserProjBacked,
-  UserProjects
+  UserProjects,
+  UserProjectsById
 };
