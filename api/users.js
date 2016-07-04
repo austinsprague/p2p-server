@@ -12,12 +12,15 @@ router.get('/', function (req, res) {
 
 router.post('/', function(req, res){
   queries.Users().insert({
-    name: 'Betty',
-    address: '111 Pine St, SF CA',
+    first_name: 'Barney',
+    last_name: 'Rubble',
+    address: '111 Pine St',
+    city: 'Seattle',
+    state: 'WA',
     phone_num: 2069991123,
-    background: 'Ultimate baking champion',
-    username: 'betty_shop',
-    password: '123456',
+    background: 'Garlic lover',
+    email: 'guy@yahoo.com',
+    pwd: '123456',
     credit_card: 1111222333444,
     cvv: 123,
     exp: 0219,

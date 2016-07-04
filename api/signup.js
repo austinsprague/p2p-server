@@ -10,6 +10,14 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/login', function(req, res) {
+  res.json('login get');
+});
+
+router.get('/profile', function(req, res) {
+  res.json('login get');
+})
+
 router.post('/', function(req, res){
   queries.Users().insert({
     name: req.body.name,

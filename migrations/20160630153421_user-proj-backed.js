@@ -1,13 +1,13 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('user-proj-backed', function(table) {
+  return knex.schema.createTable('userprojbacked', function(table) {
     table.increments();
     table.integer('user_id');
-    table.integer('project_id');
-    table.integer('amount_pledged');
+    table.integer('proj_id');
+    table.integer('amt_pledged');
     table.string('date_backed');
   })
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('user-proj-backed');
+  return knex.schema.dropTable('userprojbacked');
 };

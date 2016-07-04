@@ -1,34 +1,34 @@
 var knex = require('./knex')
 
-// function UserById(){
-//   return knex('users').where({id: req.params.id});
-// }
-function UserProjectsById(){
-  return knex('users').where({id: req.params.id}).first().then(function(user) {
-    console.log(user);
-  });
-}
+// Gets all Users table
 function Users(){
   return knex('users');
 }
-
+// gets projects table
 function Projects() {
   return knex('projects');
 }
-
+// gets the user-proj-backed table
 function UserProjBacked() {
-  return knex('user-proj-backed');
+  return knex('userprojbacked');
 }
 
+// gets all Users appends with proj backed data
+function UserBacked() {
+  return UserProjBacked().select().join('projects', 'userprojbacked.proj_id', 'projects.id');
+}
+//gets all Users and appends user table with corresponding projects to user ID
 function UserProjects() {
   return Users().select().join('projects', 'projects.user_id', 'users.id');
 }
 
 
+
+
 module.exports= {
   Users,
   Projects,
-  UserProjBacked,
+  // UserProjBacked,
   UserProjects,
-  UserProjectsById
+  UserBacked
 };

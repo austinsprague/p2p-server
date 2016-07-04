@@ -6,16 +6,16 @@ exports.up = function(knex, Promise) {
     table.text('img_url');
     table.text('desc');
     table.text('pitch');
-    table.text('idea_problem');
-    table.text('idea_solution');
-    table.text('product_features');
-    table.text('product_use_cases');
-    table.text('target_market');
-    table.text('unique_comp');
+    table.text('idea_prob');
+    table.text('idea_sol');
+    table.text('prod_feat');
+    table.text('prod_use_cases');
+    table.text('targ_mkt');
+    table.text('uniq_comp');
     table.text('history');
     table.text('use_of_funds');
     table.string('date_created');
-    table.string('date_expires');
+    table.string('date_exp');
     table.string('status');
   })
 };
