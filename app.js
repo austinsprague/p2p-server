@@ -35,7 +35,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new StripeStrategy({
     clientID: process.env.STRIPE_ID,
     clientSecret: process.env.STRIPE_SECRET,
-    callbackURL: "http://localhost:5000/auth/stripe/callback"
+    callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
     // User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
