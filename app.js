@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var knex = require('./db/knex');
 // var rp = require('request-promise');
 var cors = require('cors');
+var passport = require('passport');
+var StripeStrategy = require('passport-stripe').Strategy;
 require('dotenv').load();
 
 
@@ -21,6 +23,29 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/api', require('./api'));
+
+passport.use(new StripeStrategy({
+    clientID: process.env.STRIPE_ID,
+    clientSecret: process.env.STRIPE_SECRET,
+    callbackURL: "http://localhost:3000/auth/stripe/callback"
+  },
+  function(accessToken, refreshToken, stripe_properties, done) {
+    User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
+      function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+
+app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
+app.get('/auth/stripe/callback',
+  passport.authenticate('stripe', {failureRedirect: '/login'}),
+  function(req, res) {
+    res.redirect('/')
+  }
+)
+
+
 
 
 // catch 404 and forward to error handler

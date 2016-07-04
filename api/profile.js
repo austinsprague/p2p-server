@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
 //   });
 // });
 router.get('/backed', function (req, res) {
-  queries.UserBacked().then(function(data){
+  queries.UserProjBacked().then(function(data){
     res.json(data);
   }).catch(function(err){
     res.json(err);
@@ -35,13 +35,19 @@ router.get('/:id/projects', function (req, res) {
   });
 });
 
-// __________get backed projects which user has donated
+// __________get backed projects which user has BACKED -----NOT WORKING
 router.get('/:id/backed', function (req, res) {
-  queries.UserBacked().where({ user_id: req.params.id }).then(function(data){
-    res.json(data);
-  }).catch(function(err){
-    res.json(err);
-  });
+  queries.UserProjBacked().where({ user_id: req.params.id })
+    .then(function(data){
+      console.log(data[0]);
+      // return Projects().where({ id: data[0].user_id })
+    })
+    // .then(function(result) {
+    //   res.json(result);
+    // })
+    .catch(function(err){
+      res.json(err);
+    });
 });
 
 

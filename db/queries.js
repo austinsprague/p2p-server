@@ -28,7 +28,7 @@ function UserProjects() {
 module.exports= {
   Users,
   Projects,
-  // UserProjBacked,
+  UserProjBacked,
   UserProjects,
   UserBacked
 };
