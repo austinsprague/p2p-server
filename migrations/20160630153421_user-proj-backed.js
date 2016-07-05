@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('proj_id');
     table.integer('amt_pledged');
     table.string('date_backed');
+    table.string('order_id');
   })
 };
 

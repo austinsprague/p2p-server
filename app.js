@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session');
 var knex = require('./db/knex');
 // var rp = require('request-promise');
 var cors = require('cors');
@@ -21,6 +22,10 @@ app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cookieSession({
+  name: 'session',
+  keys: [process.env.SESSION_KEY]
+}))
 app.use(cors());
 app.use('/api', require('./api'));
 
