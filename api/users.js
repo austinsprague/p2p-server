@@ -5,13 +5,13 @@ var queries = require('../db/queries');
 router.get('/', function (req, res) {
   queries.Users().then(function(data){
     res.json(data);
+    console.log(req.user);
   }).catch(function(err){
     res.json(err);
   });
 });
 
 router.post('/', function(req, res){
-  console.log(req.body);
   queries.Users().insert({
     first_name: 'NEW',
     last_name: 'user',
