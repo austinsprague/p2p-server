@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
-var stripe = require("stripe")("sk_test_VAbPVNDFCIbiKiFovceDQAAt");
+var stripe = require("stripe")(process.env.STRIPE);
 
 router.get('/', function (req, res) {
   queries.UserProjBacked().then(function(data){
