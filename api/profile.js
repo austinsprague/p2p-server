@@ -9,13 +9,7 @@ router.get('/', function (req, res) {
     res.json(err);
   });
 });
-// router.get('/:id', function (req, res) {
-//   queries.UsersById(req.params.id).first().then(function(data){
-//     res.json(data);
-//   }).catch(function(err){
-//     res.json(err);
-//   });
-// });
+
 router.get('/backed', function (req, res) {
   queries.UserProjBacked().then(function(data){
     res.json(data);
@@ -23,8 +17,6 @@ router.get('/backed', function (req, res) {
     res.json(err);
   });
 });
-
-
 
 // __________getting projects which user has created
 router.get('/:id/projects', function (req, res) {

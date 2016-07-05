@@ -10,10 +10,6 @@ exports.up = function(knex, Promise) {
     table.text('background');
     table.string('email');
     table.string('pwd');
-    // table.bigInteger('credit_card');
-    // table.integer('cvv');
-    // table.integer('exp');
-    table.string('token');
     table.integer('zip');
   })
 };

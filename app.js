@@ -19,13 +19,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: process.env.SESSION_KEY, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieSession({
-  name: 'session',
-  keys: [process.env.SESSION_KEY]
-}))
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: [process.env.SESSION_KEY]
+// }))
 app.use(cors());
 app.use('/api', require('./api'));
 
