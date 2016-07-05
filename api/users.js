@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
+var helpers = require('./helpers');
+// var stripe = require("stripe")("sk_test_VAbPVNDFCIbiKiFovceDQAAt");
 
 router.get('/', function (req, res) {
   queries.Users().then(function(data){
@@ -11,7 +13,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function(req, res){
-  console.log(req.body);
+  helpers.stripeCustCreate();
   queries.Users().insert({
     first_name: 'NEW',
     last_name: 'user',

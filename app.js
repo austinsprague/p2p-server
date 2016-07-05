@@ -11,6 +11,7 @@ var knex = require('./db/knex');
 var cors = require('cors');
 var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
+var stripe = require("stripe")("sk_test_VAbPVNDFCIbiKiFovceDQAAt");
 require('dotenv').load();
 
 // uncomment after placing your favicon in /public
@@ -27,7 +28,13 @@ app.use(passport.session());
 //   keys: [process.env.SESSION_KEY]
 // }))
 app.use(cors());
+app.use(function (req, res, next) {
+  res.locals.user = req.user
+  next()
+});
 app.use('/api', require('./api'));
+
+
 
 passport.serializeUser(function(user, done) {
   done(null, user);
