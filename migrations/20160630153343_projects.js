@@ -5,6 +5,8 @@ exports.up = function(knex, Promise) {
     table.integer('user_id');
     table.text('img_url');
     table.text('desc');
+    table.string('category');
+    table.string('neighborhood');
     table.text('pitch');
     table.text('idea_prob');
     table.text('idea_sol');
