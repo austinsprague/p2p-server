@@ -1,38 +1,37 @@
 var queries = require('../db/queries');
-var stripe = require('stripe')(process.env.STRIPE);
+var stripe = require("stripe")(process.env.STRIPE);
 
 function stripeCharge() {
   stripe.charges.create({
-  amount: 400,
-  currency: "usd",
-  source: 'tok_18ToCu2eZvKYlo2Cal1oJhFK',
-  description: "Charge for test@example.com"
-  }, {
-    idempotency_key: "axJl84KiKqBHMxM7"
+    amount: 400,
+    currency: "usd",
+    source: token,
+    description: "Charge for test@example.com"
   }, function(err, charge) {
-    // console.log(err);
-    // console.log(charge);
-  // asynchronously called
-  }
-)};
+    console.log('this is the error:' + err);
+    console.log('this is the charge' + charge);
+    // asynchronously called
+  });
+};
 
-function stripeCustCreate(res, req) {
+function stripeCustCreate(token, email) {
   stripe.customers.create({
-    source : 'tok_18TmTs2eZvKYlo2CtepEnJDq',
-    description : 'holy@moly.com', // customer's email (get it from db or session)
+    source : token,
+    description : email
   }).then(function(customer) {
-    return stripe.charges.create({
-      amount: 1000,
-      currency: "usd",
-      customer: customer.id
-    }).then(function(charge) {
-      // console.log('charged ' + charge);
-    });
+    console.log('this is the cust ID:' + customer.id);
   })
 }
 
+function authStripeCust(key) {
+  stripe.customers.create(
+    { description: "example@stripe.com" },
+    { api_key: process.ENV.STRIPE_SECRET } // account's access token from the Connect flow
+  );
+}
 
 module.exports = {
   stripeCharge,
-  stripeCustCreate
+  stripeCustCreate,
+  authStripeCust
 }

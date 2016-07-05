@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
+var helpers = require('./helpers');
 var stripe = require("stripe")(process.env.STRIPE);
 
 router.get('/', function (req, res) {
@@ -29,16 +30,7 @@ router.post('/charge', function(req, res){
     order_id: 1,
     token: token
   }).then(function(){
-    stripe.charges.create({
-      amount: 400,
-      currency: "usd",
-      source: token,
-      description: "Charge for test@example.com"
-    }, function(err, charge) {
-      console.log(err);
-      console.log(charge);
-      // asynchronously called
-    });
+    helpers.stripeCustCreate(token);
     res.json(data);
   }).catch(function(err){
     res.json(err);
