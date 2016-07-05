@@ -11,33 +11,25 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function(req, res){
+  console.log(req.body);
   queries.Users().insert({
-    name: 'Betty',
-    address: '111 Pine St, SF CA',
+    first_name: 'NEW',
+    last_name: 'user',
+    address: '111 Pine St',
+    city: 'SF',
+    state: 'CA',
     phone_num: 2069991123,
-    background: 'Ultimate baking champion',
-    username: 'betty_shop',
-    password: '123456',
-    credit_card: 1111222333444,
-    cvv: 123,
-    exp: 0219,
-    zip: 99999
+    background: 'Garlic lover',
+    email: 'guy@yahoo.com',
+    pwd: '123456'
   }).then(function(){
-    res.json('success');
+    res.json(data);
   }).catch(function(err){
     res.json(err);
   })
 });
 
 router.get('/:id', function (req, res) {
-  queries.Users().where({ id: req.params.id }).first().then(function(data){
-    res.json(data);
-  }).catch(function(err){
-    res.json(err);
-  });
-});
-
-router.get('/:id/update', function (req, res) {
   queries.Users().where({ id: req.params.id }).first().then(function(data){
     res.json(data);
   }).catch(function(err){
@@ -52,11 +44,7 @@ router.put('/:id/update', function (req, res) {
     phone_num: 2069991123,
     background: 'Ultimate baking champion',
     username: 'betty_shop',
-    password: '123456',
-    credit_card: 1111222333444,
-    cvv: 123,
-    exp: 0219,
-    zip: 99999
+    password: '123456'
   }).then(function(data){
     res.json('successful update');
   }).catch(function(err){
