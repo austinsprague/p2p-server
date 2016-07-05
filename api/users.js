@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
 var helpers = require('./helpers');
-// var stripe = require("stripe")("sk_test_VAbPVNDFCIbiKiFovceDQAAt");
+var stripe = require('stripe')(process.env.STRIPE);
 
 router.get('/', function (req, res) {
   queries.Users().then(function(data){

@@ -5,17 +5,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var cookieSession = require('cookie-session');
+// var cookieSession = require('cookie-session');
 var knex = require('./db/knex');
-// var rp = require('request-promise');
 var cors = require('cors');
 var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
-var stripe = require("stripe")("sk_test_VAbPVNDFCIbiKiFovceDQAAt");
+var stripe = require("stripe")(process.env.STRIPE);
 require('dotenv').load();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,8 +30,6 @@ app.use(function (req, res, next) {
   next()
 });
 app.use('/api', require('./api'));
-
-
 
 passport.serializeUser(function(user, done) {
   done(null, user);

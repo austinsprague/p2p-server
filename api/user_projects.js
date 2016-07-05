@@ -20,7 +20,6 @@ router.get('/:id', function (req, res) {
 });
 
 router.post('/charge', function(req, res){
-  console.log(req.body.token);
   var token = req.body.token;
   queries.UserProjBacked().insert({
     user_id: 1,
