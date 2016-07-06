@@ -38,6 +38,7 @@ router.post('/', function(req, res){
   var token = req.body.token;
   var email = req.body.email;
   helpers.stripeCustCreate(token, email).then(function(customer) {
+    console.log(customer);
     queries.Users().insert({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
@@ -48,7 +49,7 @@ router.post('/', function(req, res){
       background: 'Garlic lover',
       email: req.body.email,
       pwd: req.body.pwd,
-      account_id: customer.id
+      background: customer.id
     }).then(function(data){
       res.json(data)
     })
