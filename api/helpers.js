@@ -15,18 +15,16 @@ function stripeCharge() {
 };
 
 function stripeCustCreate(token, email) {
-  stripe.customers.create({
+  return stripe.customers.create({
     source : token,
     description : email
-  }).then(function(customer) {
-    console.log('this is the cust ID:' + customer.id);
   })
 }
 
 function authStripeCust(key) {
   stripe.customers.create(
     { description: "example@stripe.com" },
-    { api_key: process.ENV.STRIPE_SECRET } // account's access token from the Connect flow
+    { api_key: process.ENV.STRIPE_SECRET }
   );
 }
 

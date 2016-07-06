@@ -1,21 +1,26 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
+var helpers = require('./helpers')
 
 router.post('/', function(req, res){
-  queries.Users().insert({
-    name: req.body.name,
-    address: '111 Pine St, SF CA',
-    phone_num: 2069991123,
-    background: 'Ultimate baking champion',
-    username: req.body.email,
-    password: req.body.pwd,
-    credit_card: 1111222333444,
+  var token = req.body.token;
+  queries.UserProjBacked().insert({
+    user_id: 7,
+    proj_id: 1,
+    amt_pledged: 11,
+    date_backed: 'may 11',
+    order_id: 6,
+    token: token
   }).then(function(){
-    res.json('success');
+    return helpers.stripeCustCreate(token).then(function(customer) {
+      queries.Users().
+      res.json(data);
+    });
   }).catch(function(err){
+    console.log('error', err);
     res.json(err);
-  });
+  })
 });
 
 
