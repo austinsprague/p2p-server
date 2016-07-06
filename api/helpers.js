@@ -16,6 +16,7 @@ function stripeCharge() {
 
 function stripeCustCreate(token, email) {
   return stripe.customers.create({
+    // source: "card",
     source : token,
     description : email
   })
