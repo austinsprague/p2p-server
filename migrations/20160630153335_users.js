@@ -11,6 +11,7 @@ exports.up = function(knex, Promise) {
     table.string('email');
     table.string('pwd');
     table.integer('zip');
+    table.string('account_id');
   })
 };
 
