@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('amt_pledged');
     table.string('date_backed');
     table.string('order_id');
-    table.string('token');
+    table.string('backer_token');
   })
 };
 

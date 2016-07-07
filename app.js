@@ -51,13 +51,14 @@ passport.use(new StripeStrategy({
     stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
       queries.Users().insert({
         first_name: account.display_name,
-        stripe_acct_id: account.id
+        stripe_acct_id: account.id,
+        stripe_publishable_key: key
       }).then(function(data) {
         console.log('the account is: ' ,account);
         done(null, account);
       })
     })
-  //end first function  
+  //end first function
   }
 //end "new StripeStrategy"
 ));
