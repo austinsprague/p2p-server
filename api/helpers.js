@@ -8,12 +8,21 @@ function stripeCharge(backer) {
   // console.log(backer.amount);
   return queries.Users().select('stripe_cust_id').where({id: backer.backer_id}).first().then(function(custId){
     // console.log(custId.stripe_cust_id);
-    stripe.charges.create({
+    return stripe.charges.create({
       amount: backer.amount,
       currency: "usd",
       customer: custId.stripe_cust_id,
-      description: "Charge for test@example.com"
-    }).then(function(data){
+      description: "Charge for test@example.com",
+      capture: false
+    })
+    .then(function(data){
+      return queries.UserProjBacked().insert({
+        user_id: data.customer.id, // change user_id to stripe_cust_id
+        proj_id: backer.proj_id,
+        amt_pledged: data.amount,
+        token: data.id
+            // insert funds_captured later
+      });
       return data.id;
     })
   }).catch(function(err, charge) {

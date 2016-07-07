@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.string('date_backed');
     table.string('order_id');
     table.string('backer_token');
+    table.string('funds_captured');
   })
 };
 
