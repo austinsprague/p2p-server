@@ -7,6 +7,7 @@ router.use('/users', require('./users'));
 router.use('/user_projects', require('./user_projects'));
 router.use('/signup', require('./signup'));
 router.use('/profile', require('./profile'));
+router.use('/newaccount', require('./newaccount'));
 
 
 module.exports = router;

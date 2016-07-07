@@ -11,7 +11,10 @@ exports.up = function(knex, Promise) {
     table.string('email');
     table.string('pwd');
     table.integer('zip');
-    table.string('account_id');
+    table.string('display_name');
+    table.text('stripe_acct_id');
+    table.text('stripe_key_secret');
+    table.text('stripe_publishable_key');
   })
 };
 

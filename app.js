@@ -11,6 +11,7 @@ var cors = require('cors');
 var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
 var stripe = require("stripe")(process.env.STRIPE);
+var queries = require("./db/queries")
 require('dotenv').load();
 
 app.use(logger('dev'));
@@ -44,18 +45,32 @@ passport.use(new StripeStrategy({
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
-    // User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
-    //   function (err, user) {
-      console.log(accessToken);
-      done(null, { stripeId: stripe_properties.stripe_user_id});
-    // });
+    console.log('the properties: ', stripe_properties);
+    var stripe = require("stripe")(process.env.STRIPE);
+    var key = stripe_properties.stripe_publishable_key;
+    stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
+      queries.Users().insert({
+        first_name: account.display_name,
+        stripe_acct_id: account.id,
+        stripe_publishable_key: key
+      }).then(function(data) {
+        console.log('the account is: ' ,account);
+        done(null, account);
+      })
+    })
+  //end first function
   }
+//end "new StripeStrategy"
 ));
 
-app.get('/auth/stripe', passport.authenticate('stripe'));
+
+app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }), function(req,res){
+  console.log(req.body);
+});
 app.get('/auth/stripe/callback',
   passport.authenticate('stripe', { failureRedirect: '/api/users'}),
-  function(req, res) { res.redirect('http://localhost:3000/#/home') }
+  function(req, res) {
+    res.redirect('http://localhost:3000/#/home') }
 )
 
 
