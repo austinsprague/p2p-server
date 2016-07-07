@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 router.post('/', function(req, res){
   queries.Projects().insert({
     company_name: 'The rumbler maker',
-    user_id: 2,
+    user_id: 3,
     img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
     desc: 'rumbling all the time',
     pitch:'Get it',

@@ -21,12 +21,16 @@ router.get('/', function (req, res) {
 // });
 
 router.post('/:id/charge', function (req, res) {
-  console.log(req.body);
-  queries.UserProjBacked().insert({
-    user_id: req.body.user_id,
-    proj_id: req.body.proj_id,
-    amt_pledged: req.body.amount,
-    token: req.body.backer_id
+  // console.log(req.body);
+
+  helpers.stripeCharge(req.body).then(function(data){
+    console.log('this is after stripe charge:' + data);
+    // queries.UserProjBacked().insert({
+    //   user_id: req.body.user_id,
+    //   proj_id: req.body.proj_id,
+    //   amt_pledged: req.body.amount,
+    //   token: req.body.backer_id
+    // })
   }).then(function(data){
     res.json('successful user backed');
   }).catch(function(err){

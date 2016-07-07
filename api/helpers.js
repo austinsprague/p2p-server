@@ -2,13 +2,21 @@ var queries = require('../db/queries');
 var stripe = require("stripe")(process.env.STRIPE);
 var account_id = process.env.PLATFORM_ACCOUNT_ID;
 
-function stripeCharge(customer) {
-  stripe.charges.create({
-    amount: 400,
-    currency: "usd",
-    source: token,
-    description: "Charge for test@example.com"
-  }, function(err, charge) {
+
+function stripeCharge(backer) {
+  // console.log(backer.backer_id);
+  // console.log(backer.amount);
+  return queries.Users().select('stripe_cust_id').where({id: backer.backer_id}).first().then(function(custId){
+    // console.log(custId.stripe_cust_id);
+    stripe.charges.create({
+      amount: backer.amount,
+      currency: "usd",
+      customer: custId.stripe_cust_id,
+      description: "Charge for test@example.com"
+    }).then(function(data){
+      return data.id;
+    })
+  }).catch(function(err, charge) {
     console.log('this is the error:' + err);
     console.log('this is the charge' + charge);
   });
