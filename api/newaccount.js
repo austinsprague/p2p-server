@@ -9,7 +9,7 @@ router.post('/', function(req, res){
     country: "US",
     managed: true,
   }, function(acct){
-    acct.id 
+    acct.id
     console.log('account created');
   }).then(function(data){
     res.json(data);

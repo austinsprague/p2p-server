@@ -45,20 +45,27 @@ passport.use(new StripeStrategy({
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
+    console.log('the properties: ', stripe_properties);
     var stripe = require("stripe")(process.env.STRIPE);
+    var key = stripe_properties.stripe_publishable_key;
     stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
       queries.Users().insert({
         first_name: account.display_name,
         stripe_acct_id: account.id
       }).then(function(data) {
-        console.log('inserted into db');
-        done(null, account.display_name);
+        console.log('the account is: ' ,account);
+        done(null, account);
       })
-    });
+    })
+  //end first function  
   }
+//end "new StripeStrategy"
 ));
 
-app.get('/auth/stripe', passport.authenticate('stripe'));
+
+app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }), function(req,res){
+  console.log(req.body);
+});
 app.get('/auth/stripe/callback',
   passport.authenticate('stripe', { failureRedirect: '/api/users'}),
   function(req, res) {

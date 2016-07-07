@@ -4,6 +4,9 @@ var knex = require('./knex')
 function Users(){
   return knex('users');
 }
+function UsersByAcct(id){
+  return knex('users').where({stripe_acct_id: id}).select();
+}
 // gets projects table
 function Projects() {
   return knex('projects');
