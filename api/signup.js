@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
-var helpers = require('./helpers')
+var helpers = require('./helpers');
+var stripe = require('stripe')(process.env.STRIPE);
 
 // router.post('/', function(req, res){
 //   console.log(req.body);
@@ -36,29 +37,35 @@ var helpers = require('./helpers')
 
 router.post('/', function(req, res){
   var token = req.body.token;
-  var email = req.body.email;
-  helpers.stripeCustCreate(token, email).then(function(customer) {
-    console.log(customer);
-    queries.Users().insert({
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      address: '111 Pine St',
-      city: req.body.city,
-      state: req.body.state,
-      phone_num: req.body.phone_num,
-      background: 'Garlic lover',
-      email: req.body.email,
-      pwd: req.body.pwd,
-      background: customer.id
-    }).then(function(data){
-      res.json(data)
-    })
-  }).catch(function(err){
-    console.log('error', err);
-    res.json(err);
-  })
-});
 
+  stripe.charges.create({
+    amount: 1000,
+    currency: 'usd',
+    source: token,
+    destination: 'acct_18URMBGuRV8d6Wi4'
+  });
+  console.log('charged');
+
+  // helpers.stripeCustCreate(token, email).then(function(customer) {
+    // queries.Users().insert({
+    //   first_name: req.body.first_name,
+    //   last_name: req.body.last_name,
+    //   address: '111 Pine St',
+    //   city: req.body.city,
+    //   state: req.body.state,
+    //   phone_num: req.body.phone_num,
+    //   background: 'Garlic lover',
+    //   email: req.body.email,
+    //   pwd: req.body.pwd,
+    //   background: customer.id
+    // }).then(function(data){
+    //   res.json(data)
+    // })
+  // }.catch(function(err){
+  //   console.log('error', err);
+  //   res.json(err);
+})
+// });
 
 
 module.exports = router;

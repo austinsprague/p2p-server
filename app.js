@@ -11,6 +11,7 @@ var cors = require('cors');
 var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
 var stripe = require("stripe")(process.env.STRIPE);
+var queries = require("./db/queries")
 require('dotenv').load();
 
 app.use(logger('dev'));
@@ -44,18 +45,24 @@ passport.use(new StripeStrategy({
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
-    // User.findOrCreate({ stripeId: stripe_properties.stripe_user_id },
-    //   function (err, user) {
-      console.log(accessToken);
-      done(null, { stripeId: stripe_properties.stripe_user_id});
-    // });
+    var stripe = require("stripe")(process.env.STRIPE);
+    stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
+      queries.Users().insert({
+        first_name: account.display_name,
+        stripe_acct_id: account.id
+      }).then(function(data) {
+        console.log('inserted into db');
+        done(null, account.display_name);
+      })
+    });
   }
 ));
 
 app.get('/auth/stripe', passport.authenticate('stripe'));
 app.get('/auth/stripe/callback',
   passport.authenticate('stripe', { failureRedirect: '/api/users'}),
-  function(req, res) { res.redirect('http://localhost:3000/#/home') }
+  function(req, res) {
+    res.redirect('http://localhost:3000/#/home') }
 )
 
 
