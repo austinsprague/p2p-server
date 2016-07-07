@@ -17,7 +17,9 @@ router.post('/', function(req, res){
       phone_num: req.body.phone_num,
       email: req.body.email,
       pwd: req.body.pwd,
-      background: customer.id
+      stripe_cust_id: customer.id,
+      background: req.body.token,
+      stripe_card_id: req.body.stripe_card_id
     }).then(function(data){
       res.json(data)
     })
