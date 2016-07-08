@@ -5,7 +5,7 @@
   .module('signup')
   .factory('SignupService', SignupService);
 
-  function SignupService(stripe, $http, ) {
+  function SignupService(stripe, $http) {
 
     function newUser(first_name, last_name, address, city, state, phone_num, email, pwd, token) {
       this.first_name = first_name;
