@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["profile/profile-service.js"],"sourcesContent":["(function () {\n  'use strict'\n\n  angular\n  .module('profile')\n  .factory('ProfileService', ProfileService);\n\n  function ProfileService() {\n\n    return {\n      \n\n    }\n  }\n}());\n"],"file":"profile/profile-service.js","sourceRoot":"/source/"}

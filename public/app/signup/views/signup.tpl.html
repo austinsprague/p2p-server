@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <form method="POST" id="quickpay">
+      <input type="text" size="20" placeholder="First Name" ng-model="Signup.user.first_name">
+      <input type="text" size="20" placeholder="Last Name" ng-model="Signup.user.last_name">
+      <input type="text" size="20" placeholder="Email" ng-model="Signup.user.email" >
+      <input type="text" size="20" placeholder="Password" ng-model="Signup.user.pwd" >
+      <input type="text" placeholder="City" ng-model="Signup.user.city">
+      <input type="text"  placeholder="State" ng-model="Signup.user.state">
+      <input type="text" placeholder="Phone Number" ng-model="Signup.user.phone_num">
+      <input type="number" placeholder="Zip Code"  ng-model="Signup.user.zip">
+      <input ng-model="Signup.user.ccnumber" placeholder="Card Number"/>
+      <input ng-model="Signup.user.exp_month" placeholder="Expiration month"/>
+      <input ng-model="Signup.user.exp_year" placeholder="Expiration yr"/>
+      <input ng-model="Signup.user.cvc" placeholder="CVC"/>
+      <a id="checkout-button" class="btn-large waves-effect waves-light blue-grey lighten-1" ng-click="Signup.createUser()">Signup</a>
+    </form>
+  </div>
+</div>

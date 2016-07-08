@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='en' data-ng-app='p2p'>
+  <head>
+    <title>p2p</title>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+    <!-- inject:head:js -->
+    <!-- endinject -->
+    <!-- inject:html -->
+    <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/campaign/views/campaign.css">
+    <link rel="stylesheet" href="css/campaign-detail/views/campaign-detail.css">
+    <link rel="stylesheet" href="css/checkout/views/checkout.css">
+    <link rel="stylesheet" href="css/home/views/home.css">
+    <link rel="stylesheet" href="css/profile/views/profile.css">
+    <link rel="stylesheet" href="css/signup/views/signup.css">
+    <!-- endinject -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <!-- <script src="https://checkout.stripe.com/checkout.js"></script> -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.12/angular.js'></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.12/angular-aria.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.12/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.12/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-stripe/4.2.12/angular-stripe.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.js"></script> -->
+  </head>
+  <body>
+    <nav class="blue-grey darken-4" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo">Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a ui-sref="signup">Login | Signup</a></li>
+          <!-- <li><a href="localhost:5000/auth/stripe">Login | Signup</a></li> -->
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#">Login | Signup</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+
+    <!-- <div class="container"> -->
+      <div ui-view></div>
+    <!-- </div> -->
+
+    <!-- inject:js -->
+    <script src="js/signup/signup-module.js"></script>
+    <script src="js/signup/controllers/signup-controller.js"></script>
+    <script src="js/campaign-detail/campaign-detail-module.js"></script>
+    <script src="js/campaign-detail/controllers/campaign-detail-controller.js"></script>
+    <script src="js/profile/profile-module.js"></script>
+    <script src="js/profile/controllers/profile-controller.js"></script>
+    <script src="js/checkout/checkout-module.js"></script>
+    <script src="js/checkout/controllers/checkout-controller.js"></script>
+    <script src="js/home/home-module.js"></script>
+    <script src="js/home/controllers/home-controller.js"></script>
+    <script src="js/campaign/campaign-module.js"></script>
+    <script src="js/campaign/controllers/campaign-controller.js"></script>
+    <script src="js/signup/signup-service.js"></script>
+    <script src="js/signup/signup-routes.js"></script>
+    <script src="js/campaign-detail/campaign-detail-service.js"></script>
+    <script src="js/campaign-detail/campaign-detail-routes.js"></script>
+    <script src="js/profile/profile-service.js"></script>
+    <script src="js/profile/profile-routes.js"></script>
+    <script src="js/checkout/checkout-routes.js"></script>
+    <script src="js/home/home-routes.js"></script>
+    <script src="js/campaign/campaign-service.js"></script>
+    <script src="js/campaign/campaign-routes.js"></script>
+    <script src="js/app-module.js"></script>
+    <script src="js/app-routes.js"></script>
+    <!-- endinject -->
+
+
+    <!-- <script src="./bower_components/angular/angular.js"></script> -->
+    <!-- <script src="./bower_components/angular-aria/angular-aria.js"></script> -->
+    <!-- <script src="./bower_components/angular-animate/angular-animate.js"></script> -->
+    <!-- <script src="./bower_components/angular-material/angular-material.js"></script> -->
+    <!-- <script type="text/javascript">Stripe.setPublishableKey('pk_test_4CENn5hY6qEoQDOLoPtBsg4Y');</script> -->
+    <!-- <script type="text/javascript" src="./bower_components/angular-payments/lib/angular-payments.js"></script> -->
+
+  <!-- Compiled and minified JavaScript -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  </script>
+
+  </body>
+</html>

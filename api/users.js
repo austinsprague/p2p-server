@@ -13,7 +13,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function(req, res){
-  helpers.stripeCustCreate();
+  // helpers.stripeCustCreate();
   queries.Users().insert({
     first_name: 'NEW',
     last_name: 'user',

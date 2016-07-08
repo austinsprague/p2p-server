@@ -22,12 +22,27 @@ router.get('/', function (req, res) {
 
 router.post('/:id/charge', function (req, res) {
   // console.log(req.body);;
-
   helpers.stripeCharge(req.body).then(function(data){
     res.json('successful user backed');
   }).catch(function(err){
     res.json(err);
   });
 });
+
+router.post('/:id/transfer', function (req, res) {
+  var rec_stripe_cust_id = 'cus_8mFM4nk8k86TKa';
+  queries.UserProjBacked().select().where({proj_id: req.params.id})
+  .then(function(data){
+    data.forEach(function(backer) {
+      return stripe.recipients.create({
+        name: 'Jon Doe',
+        type: 'individual',
+        card: rec_stripe_cust_id
+      })
+    })
+    return data;
+  })
+})
+// });
 
 module.exports = router;

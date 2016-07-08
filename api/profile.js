@@ -2,7 +2,16 @@ var express = require('express');
 var router = express.Router();
 var queries = require('../db/queries');
 
+router.get('/:id', function (req, res) {
+  queries.Users().then(function(data){
+    res.json(data);
+  }).catch(function(err){
+    res.json(err);
+  });
+});
+
 router.get('/', function (req, res) {
+  console.log('user', req.user);
   queries.UserProjects().then(function(data){
     res.json(data);
   }).catch(function(err){

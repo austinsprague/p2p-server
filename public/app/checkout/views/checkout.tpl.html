@@ -1,0 +1,9 @@
+<div class="container">
+  <form method="POST">
+    <input ng-model="checkout.user.ccnumber" placeholder="Card Number" value="4242424242424242"/>
+    <input ng-model="checkout.user.exp_month" placeholder="Expiration month" value="12"/>
+    <input ng-model="checkout.user.exp_year" placeholder="Expiration yr" value="17"/>
+    <input ng-model="checkout.user.cvc" placeholder="CVC" value="123"/>
+    <a id="checkout-button" class="btn-large waves-effect waves-light blue-grey lighten-1" ng-click="checkout.createUser()">Signup</a>
+  </form>
+</div>
