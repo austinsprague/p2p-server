@@ -59,9 +59,7 @@ passport.use(new StripeStrategy({
         done(null, {id: ids[0]});
       });
     });
-  //end first function
   }
-//end "new StripeStrategy"
 ));
 
 
