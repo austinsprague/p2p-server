@@ -18,7 +18,12 @@
       'signup',
       'profile',
       'ngCookies'
-    ]);
+    ])
+    // .controller('NavCtrl',['$scope', '$location', function($scope, $location){
+    //   $scope.buttons = [
+    //     {ui-sref: '/profile'}
+    //   ]
+    // }])
 }());
 
 //# sourceMappingURL=app-module.js.map

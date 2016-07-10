@@ -18,8 +18,8 @@
           return result.data;
         })
       },
-      createProject: function(userId) {
-        return $http.post('api/projects/create/' + userId).then(function(result) {
+      createCampaign: function(campaign, userId) {
+        $http.post('api/projects/insert/' + userId, campaign).then(function(result) {
           return result.data;
         })
       }

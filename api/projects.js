@@ -26,57 +26,63 @@ router.get('/user/:id', function (req, res) {
   });
 });
 
-// router.get('/:id/update', function (req, res) {
-//   queries.Projects().where({ id: req.params.id }).first().then(function(data){
-//     res.json(data);
-//   }).catch(function(err){
-//     res.json(err);
-//   });
-// });
+router.get('/update/:id', function (req, res) {
+  queries.Projects().where({ id: req.params.id }).first().then(function(data){
+    res.json(data);
+  }).catch(function(err){
+    res.json(err);
+  });
+});
 
-// router.post('/create/:id', function(req, res){
-//   queries.Projects().insert({
-//     company_name: req.body.company_name,
-//     user_id: req.params.id,
-//     img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
-//     desc: req.body.desc,
-//     pitch: req.body.pitch,
-//     prod_feat: req.body.prod_feat,
-//     targ_mkt: req.body.targ_mkt,
-//     uniq_comp: req.body.uniq_comp,
-//     history: req.body.history,
-//     use_of_funds: req.body.use_of_funds,
-//     date_created: req.body.date_created,
-//     date_exp: req.body.date_exp,
-//     status: req.body.status
-//   }).then(function(){
-//     res.json('success');
-//   }).catch(function(err){
-//     res.json(err);
-//   })
-// });
-
-router.post('/create/:id', function(req, res){
+router.post('/insert/:id', function(req, res){
+  console.log('this is the server req:', req.body);
   queries.Projects().insert({
-    company_name: 'Another cool spot',
+    company_name: req.body.company_name,
     user_id: req.params.id,
     img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
-    desc: 'Hippest spot in town',
-    pitch:'Get it',
-    prod_feat:'Cool interior duh' ,
-    targ_mkt: 'The truck has been privileged to serve patrons at well-known corporations and events like Capitol Records, Mattel, The Grammys, and E3 Expo, as well as participating in countless fundraising events for schools, churches, and non-profit organizations. ',
-    uniq_comp:'Get that jam on' ,
-    history: 'After establishing a name for themselves in their brick & mortar location in Ontario, My Delight Cupcakery launched a gourmet food truck in September of 2011. Since its debut, the truck has frequented numerous cities in the Los Angeles County, Orange County, as well as in their home-base of San Bernardino County.',
-    use_of_funds: 'Need to jam all night',
-    date_created: 'May 25 2016',
-    date_exp: '45 days',
-    status: 'active'
+    desc: req.body.desc,
+    pitch: req.body.pitch,
+    prod_feat: req.body.prod_feat,
+    targ_mkt: req.body.targ_mkt,
+    uniq_comp: req.body.uniq_comp,
+    history: req.body.history,
+    use_of_funds: req.body.use_of_funds,
+    date_created: req.body.date_created,
+    date_exp: req.body.date_exp,
+    status: req.body.status
   }).then(function(){
+    console.log('successful insert');
     res.json('success');
   }).catch(function(err){
     res.json(err);
   })
 });
+
+// router.post('/create/:id', function(req, res){
+//   console.log('this is the req', req.body);
+//   queries.insertProjects(req.body, req.params.id)
+//   .then(function(){
+//     console.log('successful insert');
+//     res.json('success');
+//   }).catch(function(err){
+//     res.json(err);
+//   })
+// })
+  // queries.Projects().insert({
+  //   company_name: req.body.company_name,
+  //   user_id: req.params.id,
+  //   img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
+  //   desc: 'Hippest spot in town',
+  //   pitch:'Get it',
+  //   prod_feat:'Cool interior duh' ,
+  //   targ_mkt: 'The truck has been privileged to serve patrons at well-known corporations and events like Capitol Records, Mattel, The Grammys, and E3 Expo, as well as participating in countless fundraising events for schools, churches, and non-profit organizations. ',
+  //   uniq_comp:'Get that jam on' ,
+  //   history: 'After establishing a name for themselves in their brick & mortar location in Ontario, My Delight Cupcakery launched a gourmet food truck in September of 2011. Since its debut, the truck has frequented numerous cities in the Los Angeles County, Orange County, as well as in their home-base of San Bernardino County.',
+  //   use_of_funds: 'Need to jam all night',
+  //   date_created: 'May 25 2016',
+  //   date_exp: '45 days',
+  //   status: 'active'
+// });
 
 router.put('/:id/update', function (req, res) {
   queries.Projects().where({ id: req.params.id }).update({

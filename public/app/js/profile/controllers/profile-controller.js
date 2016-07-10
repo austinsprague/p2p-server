@@ -15,6 +15,7 @@
   function ProfileCtrl($state, $stateParams, ProfileService, $cookies) {
     var vm = this;
     var currentUserId = $cookies.getObject('user');
+    console.log(currentUserId);
 
     ProfileService.getUser(currentUserId).then(function(user){
       vm.user = user;
@@ -23,6 +24,10 @@
     ProfileService.getProjects(currentUserId).then(function(projects){
       vm.projects = projects;
     });
+    vm.createCampaign = function(){
+      ProfileService.createCampaign(vm.proj, currentUserId);
+      $state.go('profile');
+    }
   }
 }());
 

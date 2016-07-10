@@ -9,14 +9,10 @@ router.use('/signup', require('./signup'));
 router.use('/profile', require('./profile'));
 router.use('/newaccount', require('./newaccount'));
 
-router.get('/', function(req, res){
-  if (req.user.id) {
-    res.json(req.user.id);
-  } else {
-    res.redirect('/#/home');
-  }
-
-})
-
+// router.get('/', function(req, res){
+//   if (req.user.id) {
+//     res.json(req.user.id);
+//   }
+// })
 
 module.exports = router;
