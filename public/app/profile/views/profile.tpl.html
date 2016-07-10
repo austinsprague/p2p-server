@@ -1,22 +1,23 @@
 <div class="container">
   <div class="row">
     <h3>Your Campaigns</h3>
+    <h6>{{profile.display_name}}</h6>
   </div>
-  <div class="row" id="projects">
-    <h4>Your current campaigns</h4>
-    <ul class="collection">
+  <div class="row" id="projects" >
+    <h5>Your current campaigns</h5>
+    <ul class="collection" ng-repeat="project in profile.projects" ui-sref="campaignDetail({id: project.id})">
       <li class="collection-item avatar">
-        <img src="../../images/local.jpeg" alt="" class="circle">
-        <span class="title">Business Name</span>
-        <p>First Line <br>
-           Second Line
+      <img src="{{project.img_url}}" alt="" class="circle">
+        <span class="companyName">{{project.company_name}}</span>
+        <p>{{project.status}} <br>
+           {{project.date_exp}}
         </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        <a href="#!" class="secondary-content"><i class="material-icons">Grade</i></a>
       </li>
     </ul>
   </div>
   <div class="row" id="backed">
-    <h4>Campaigns you've backed!</h4>
+    <h4>Campaigns you've backed!</h5>
     <ul class="collection">
       <li class="collection-item avatar">
         <img src="../../images/local.jpeg" alt="" class="circle">

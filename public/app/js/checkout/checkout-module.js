@@ -10,7 +10,8 @@
     .module('checkout', [
       'ui.router',
       // 'angularPayments',
-      'angular-stripe'
+      'angular-stripe',
+      'ngCookies'
       // 'stripe'
     ]);
 }());

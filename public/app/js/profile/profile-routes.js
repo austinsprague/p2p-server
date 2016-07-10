@@ -5,7 +5,9 @@
     .module('profile')
     .config(config);
 
-  function config($stateProvider) {
+  function config($stateProvider, $httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+
     $stateProvider
       .state('profile', {
         url: '/profile',

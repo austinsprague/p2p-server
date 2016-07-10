@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
-  name: 'session',
+  name: 'user_session',
   keys: [process.env.SESSION_KEY]
 }))
 app.use(express.static('public/app'));
@@ -43,7 +43,7 @@ passport.deserializeUser(function(user, done) {
 
 passport.use(new StripeStrategy({
     clientID: process.env.STRIPE_ID,
-    clientSecret: process.env.STRIPE_SECRET,
+    clientSecret: process.env.STRIPE,
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
@@ -63,13 +63,13 @@ passport.use(new StripeStrategy({
 ));
 
 
-app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }), function(req,res){
-  // console.log(req.body);
-});
+app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
 app.get('/auth/stripe/callback',
-  passport.authenticate('stripe', { failureRedirect: '/api/users'}),
+  passport.authenticate('stripe', { failureRedirect: '/#/home'}),
   function(req, res) {
-    res.redirect('/#/home/') }
+    console.log('redirect success');
+    res.redirect('/#/home')
+  }
 )
 
 

@@ -12,13 +12,13 @@ router.get('/', function (req, res) {
   });
 });
 
-// router.get('/:id', function (req, res) {
-//   queries.UserProjBacked().where({ user_id: req.params.id }).first().then(function(data){
-//     res.json(data);
-//   }).catch(function(err){
-//     res.json(err);
-//   });
-// });
+router.get('/:id', function (req, res) {
+  queries.UserProjects().where({ user_id: req.params.id }).then(function(data){
+    res.json(data);
+  }).catch(function(err){
+    res.json(err);
+  });
+});
 
 router.post('/:id/charge', function (req, res) {
   // console.log(req.body);;

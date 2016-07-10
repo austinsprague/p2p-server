@@ -8,7 +8,8 @@
    */
   angular
     .module('profile', [
-      'ui.router'
+      'ui.router',
+      'ngCookies'
     ]);
 }());
 

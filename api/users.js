@@ -12,6 +12,14 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/:id', function (req, res) {
+  queries.Users().where({ id: req.params.id }).first().then(function(data){
+    res.json(data);
+  }).catch(function(err){
+    res.json(err);
+  });
+});
+
 router.post('/', function(req, res){
   // helpers.stripeCustCreate();
   queries.Users().insert({
@@ -31,13 +39,6 @@ router.post('/', function(req, res){
   })
 });
 
-router.get('/:id', function (req, res) {
-  queries.Users().where({ id: req.params.id }).first().then(function(data){
-    res.json(data);
-  }).catch(function(err){
-    res.json(err);
-  });
-});
 
 router.put('/:id/update', function (req, res) {
   queries.Users().where({ id: req.params.id }).update({

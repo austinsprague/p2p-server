@@ -14,9 +14,10 @@
 
   function CampaignCtrl($state, CampaignService) {
     var vm = this;
+    vm.user_id = 1;
 
     CampaignService.getProjects().then(function(data){
-       vm.projects = data;
+      vm.projects = data;
     });
   }
 }());
