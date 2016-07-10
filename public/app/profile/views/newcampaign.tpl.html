@@ -1,0 +1,99 @@
+<div class="row">
+  <form class="col s12" method="POST">
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">fingerprint</i>
+        <input ng-model="profile.proj.company_name" id="companyName" type="text" class="validate">
+        <label for="companyName">Awesome Business Name</label>
+      </div>
+      <div class="input-field col s3">
+        <i class="material-icons prefix">location_city</i>
+        <input ng-model="profile.proj.city" type="text" class="validate">
+        <label for="city">City</label>
+      </div>
+      <div class="input-field col s3">
+        <i class="material-icons prefix">place</i>
+        <input ng-model="profile.proj.neighborhood" type="text" class="validate">
+        <label for="neighborhood">Neighborhood</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">burst_mode</i>
+        <textarea ng-model="profile.proj.pitch" class="materialize-textarea validate"></textarea>
+        <label for="pitch">2-3 sentences, sell us your business!</label>
+      </div>
+      <!-- <div class="input-field col s6">
+        <i class="material-icons prefix">multiline_chart</i>
+        <textarea ng-model="profile.proj.desc" class="materialize-textarea validate"></textarea>
+        <label for="desc">What is your business model? Description.</label>
+      </div> -->
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">report_problem</i>
+        <textarea ng-model="profile.proj.idea_prob" class="materialize-textarea validate"></textarea>
+        <label for="idea_prob">What is the problem?</label>
+      </div>
+      <div class="input-field col s6">
+        <i class="material-icons prefix">lightbulb_outline</i>
+        <textarea ng-model="profile.proj.idea_sol" class="materialize-textarea validate"></textarea>
+        <label for="idea_sol">What are your possible solutions?</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">bubble_chart</i>
+        <textarea ng-model="profile.proj.targ_mkt" class="materialize-textarea validate"></textarea>
+        <label for="targ_mkt">What is your target market?</label>
+      </div>
+      <div class="input-field col s6">
+        <i class="material-icons prefix">compare</i>
+        <textarea ng-model="profile.proj.uniq_comp" class="materialize-textarea validate"></textarea>
+        <label for="uniq_comp">What makes you unique to your competitors?</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">rate_review</i>
+        <textarea ng-model="profile.proj.history" class="materialize-textarea validate"></textarea>
+        <label for="history">Tell us about the history of the business. Any recognition or social media shoutouts?</label>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="input-field col s3">
+        <i class="material-icons prefix">monetization_on</i>
+        <input id="campaignAmount" type="text" class="validate">
+        <label for="campaignAmount">How much would you like to ask help for?</label>
+      </div>
+      <div class="input-field col s9">
+        <i class="material-icons prefix">trending_up</i>
+        <textarea id="use_of_funds" class="materialize-textarea validate"></textarea>
+        <label for="use_of_funds">What are your plans for the funds raising?</label>
+      </div>
+    </div> -->
+    <a id="newcampaignbtn" class="btn-large waves-effect waves-light blue-grey lighten-1" ng-click="profile.createCampaign()">Submit</a>
+  </form>
+</div>
+
+
+
+<!-- company_name
+user_id
+rec_stripe_cust_id
+img_url
+desc
+category
+neighborhood
+pitch
+idea_prob
+idea_sol
+prod_feat
+prod_use_cases
+targ_mkt
+uniq_comp
+history
+use_of_funds
+date_created
+date_exp
+status -->
