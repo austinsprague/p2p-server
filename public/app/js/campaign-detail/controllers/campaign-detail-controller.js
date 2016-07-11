@@ -32,23 +32,12 @@
       vm.use_of_funds = data.use_of_funds;
       vm.status = data.status;
     });
-
-    // setInterval(FetchData(vm.ended),1000);
-
-    vm.campaignEnd = function(){
-      console.log('button clicked');
-      vm.ended = true;
-      vm.funded = true;
-      $http.post('/api/user_projects/' + campaignId + '/transfer')
-      .then(function(data){
-        console.log('posted');
-        return data;
-      })
-    };
-    //   CampaignDetailService.fundCampaign($stateParams.id).then(function(){
-    //     console.log('this is funded');
-    //   });
-    // };
+    CampaignDetailService.getBackedInfo(vm.campaignId).then(function(data){
+      vm.backerCount = data.length;
+      for (var i = 0; i < data.length; i++) {
+        vm.amtPledged = data[i].amt_pledged;
+      }
+    })
 
     vm.createUserCharge = function(amount){
       vm.userCharge = {};
@@ -61,8 +50,11 @@
 
       $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
       .then(function(user){
-        console.log(user);
-        return user;
+        console.log('this is user', user);
+        // vm.amtPledged = vm.amtPledged + parseInt(user.data.amount);
+        // vm.backerCount = vm.backerCount + 1;
+        $state.go('profile')
+        // return user;
       })
     }
   }

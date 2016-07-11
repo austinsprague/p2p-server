@@ -24,8 +24,8 @@
     ProfileService.getProjects(currentUserId).then(function(projects){
       vm.projects = projects;
     });
-    ProfileService.getBackedProjects(currentUserId).then(function(projects){
-      vm.projects = projects;
+    ProfileService.getBackedProj(currentUserId).then(function(projects){
+      vm.backedProj = projects;
     });
     vm.createCampaign = function(){
       ProfileService.createCampaign(vm.proj, currentUserId);

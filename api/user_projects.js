@@ -30,38 +30,12 @@ router.post('/charge/:id', function (req, res) {
   }).then(function(data){
     res.json(data);
     console.log('this is data', data);
-    return helpers.stripeCharge(req.body).then(function(data){
-      res.json('successful user backed');
-    })
+    // return helpers.stripeCharge(req.body).then(function(data){
+    //   res.json('successful user backed');
+    // })
   }).catch(function(err){
     res.json(err);
   });
 });
-// "id": 1,
-//     "user_id": 3,
-//     "rec_stripe_cust_id": null,
-//     "charge_stripe_cust_id": null,
-//     "proj_id": null,
-//     "amt_pledged": null,
-//     "date_backed": null,
-//     "order_id": null,
-//     "backer_token": null,
-//     "funds_captured": null
-
-// router.post('/:id/transfer', function (req, res) {
-//   var rec_stripe_cust_id = 'cus_8mFM4nk8k86TKa';
-//   queries.UserProjBacked().select().where({proj_id: req.params.id})
-//   .then(function(data){
-//     data.forEach(function(backer) {
-//       return stripe.recipients.create({
-//         name: 'Jon Doe',
-//         type: 'individual',
-//         card: rec_stripe_cust_id
-//       })
-//     })
-//     return data;
-//   })
-// })
-// });
 
 module.exports = router;

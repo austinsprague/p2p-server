@@ -23,6 +23,11 @@
           return user.data;
         });
       },
+      getBackedInfo: function(proj_id) {
+        return $http.get('/api/user_projects/backed/'+ proj_id).then(function(data){
+          return data.data;
+        });
+      },
       createUserCharge: function(backer_id,proj_id,amount,user_id){
         console.log('charged');
         var userCharge = {};

@@ -3,6 +3,22 @@
     <h3>Your Campaigns</h3>
     <h6>{{profile.display_name}}</h6>
   </div>
+  <div class="row" id="backed">
+    <h4>Campaigns you've backed!</h5>
+      <ul class="collection" ng-repeat="backedProj in profile.backedProj" ui-sref="campaignDetail({id: backedProj.id})">
+        <li class="collection-item avatar">
+        <img src=" " alt="" class="circle">
+          <span class="companyName">{{backedProj.company_name}}</span>
+          <p>{{backedProj.status}} <br>
+             {{backedProj.date_exp}}
+          </p>
+          <p>
+            {{backeProj}}
+          </p>
+          <a href="#!" class="secondary-content"><i class="material-icons">Grade</i></a>
+        </li>
+      </ul>
+    </div>
   <div class="row" id="projects" >
     <h5>Your current campaigns</h5>
     <ul class="collection" ng-repeat="project in profile.projects" ui-sref="campaignDetail({id: project.id})">
@@ -13,19 +29,6 @@
            {{project.date_exp}}
         </p>
         <a href="#!" class="secondary-content"><i class="material-icons">Grade</i></a>
-      </li>
-    </ul>
-  </div>
-  <div class="row" id="backed">
-    <h4>Campaigns you've backed!</h5>
-    <ul class="collection">
-      <li class="collection-item avatar">
-        <img src="../../images/local.jpeg" alt="" class="circle">
-        <span class="title">Business</span>
-        <p>First Line <br>
-           Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
       </li>
     </ul>
   </div>
