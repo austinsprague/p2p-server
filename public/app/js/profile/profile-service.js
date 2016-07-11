@@ -18,6 +18,11 @@
           return result.data;
         })
       },
+      getBackedProjects: function(userId) {
+        return $http.get('api/user_projects/' + userId).then(function(result) {
+          return result.data;
+        })
+      },
       createCampaign: function(campaign, userId) {
         $http.post('api/projects/insert/' + userId, campaign).then(function(result) {
           return result.data;

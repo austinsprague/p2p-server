@@ -35,7 +35,6 @@ router.get('/update/:id', function (req, res) {
 });
 
 router.post('/insert/:id', function(req, res){
-  console.log('this is the server req:', req.body);
   queries.Projects().insert({
     company_name: req.body.company_name,
     user_id: req.params.id,
@@ -49,7 +48,7 @@ router.post('/insert/:id', function(req, res){
     use_of_funds: req.body.use_of_funds,
     date_created: req.body.date_created,
     date_exp: req.body.date_exp,
-    status: req.body.status
+    status: 'active'
   }).then(function(){
     console.log('successful insert');
     res.json('success');
@@ -58,16 +57,7 @@ router.post('/insert/:id', function(req, res){
   })
 });
 
-// router.post('/create/:id', function(req, res){
-//   console.log('this is the req', req.body);
-//   queries.insertProjects(req.body, req.params.id)
-//   .then(function(){
-//     console.log('successful insert');
-//     res.json('success');
-//   }).catch(function(err){
-//     res.json(err);
-//   })
-// })
+
   // queries.Projects().insert({
   //   company_name: req.body.company_name,
   //   user_id: req.params.id,

@@ -4,25 +4,18 @@ var account_id = process.env.PLATFORM_ACCOUNT_ID;
 
 
 function stripeCharge(backer) {
-  // console.log(backer);
-  return queries.Users().select('stripe_cust_id').where({id: backer.backer_id}).first()
+  console.log(backer);
+  return queries.Users().select('stripe_cust_id').where({id: backer.charge_stripe_cust_id}).first()
   .then(function(custId){
+    console.log('customer', custId);
+    console.log('backer', backer);
     return stripe.charges.create({
-      amount: backer.amount,
-      currency: "usd",
-      description: "Charge for test@example.com",
-      source: 'cus_8liNI7MubfAfRg'
+      // amount: backer.amount,
+      // currency: "usd",
+      // description: "Charge for test@example.com",
+      // source: custId.stripe_cust_id
       // destination: 'acct_18URMBGuRV8d6Wi4'
       })
-    }).then(function(data){
-      return queries.UserProjBacked().insert({
-        user_id: data.customer.id, // change user_id to stripe_cust_id
-        proj_id: backer.proj_id,
-        amt_pledged: data.amount,
-        token: data.id
-            // insert funds_captured later
-      });
-    return data.id;
   }).catch(function(err, charge) {
     console.log('this is the error:' + err);
     console.log('this is the charge' + charge);
@@ -64,7 +57,7 @@ function stripeCustCreate(token, email) {
 }
 
 function stripeAcctCharge(receiver_token, amount, destination) {
-  //create a new token using the 
+  //create a new token using the
   stripe.charges.create({
     amount: amount,
     currency: 'usd',

@@ -15,18 +15,16 @@
       },
       getUsers: function() {
         return $http.get('/api/users').then(function(users) {
-          // console.log(users.data);
           return users.data;
         });
       },
       getUserById: function(id) {
         return $http.get('/api/users/'+ id).then(function(user){
-          console.log(user.data);
           return user.data;
         });
       },
       createUserCharge: function(backer_id,proj_id,amount,user_id){
-        console.log('clicked');
+        console.log('charged');
         var userCharge = {};
         userCharge.backer_id = 1;
         userCharge.proj_id = projId;
@@ -35,14 +33,12 @@
 
         return $http.post('/api/user_projects/' + userCharge.proj_id + '/charge', vm.userCharge)
         .then(function(user){
-          console.log('posted');
           return user;
         })
       },
       fundCampaign: function (proj_id) {
         return $http.post('/api/user_projects/' + proj_id + '/transfer')
         .then(function(data){
-          console.log('posted');
           return data;
         })
       }
