@@ -10,10 +10,15 @@ function stripeCharge(backer) {
     console.log('the card is', stripeCreateToken().card.id);
     console.log('token is ', token);
     return stripe.charges.create({
-      amount: cust.amount,
+      amount: cust.amt_pledged,
       currency: "usd",
       description: "Charge for test@example.com",
-      source: token
+      card: {
+            "number": '4242424242424242',
+            "exp_month": 12,
+            "exp_year": 2017,
+            "cvc": '123'
+          }
       })
   }).catch(function(err, charge) {
     console.log('this is the error:' + err);
@@ -48,8 +53,9 @@ function stripeAcctRetrieve(data) {
         if (user) {
           queries.Users().update({
             display_name: account.display_name,
-            stripe_acct_id: account.id,
-            stripe_publishable_key: data.stripe_publishable_key
+            stripe_publishable_key: data.stripe_publishable_key,
+            stripe_access_token: account.stripe_access_token,
+            stripe_refresh_token: account.stripe_refresh_token
           }, '*').then(function(users){
             resolve(users[0]);
           }).catch(function(err){
@@ -59,7 +65,9 @@ function stripeAcctRetrieve(data) {
           queries.Users().insert({
             first_name: account.display_name,
             stripe_acct_id: account.id,
-            stripe_publishable_key: account.stripe_publishable_key
+            stripe_publishable_key: account.stripe_publishable_key,
+            stripe_access_token: account.stripe_access_token,
+            stripe_refresh_token: account.stripe_refresh_token
           }, '*').then(function(users) {
             resolve(users[0]);
           }).catch(function(err){
@@ -73,7 +81,6 @@ function stripeAcctRetrieve(data) {
 
 module.exports = {
   stripeCharge,
-  // stripeCustCreate,
   stripeAcctRetrieve
   // stripeTransfer
 }

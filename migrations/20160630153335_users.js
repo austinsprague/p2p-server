@@ -14,6 +14,8 @@ exports.up = function(knex, Promise) {
     table.text('stripe_acct_id');
     table.text('stripe_cust_id');
     table.text('stripe_publishable_key');
+    table.text('stripe_access_token');
+    table.text('stripe_refresh_token');
   })
 };
 

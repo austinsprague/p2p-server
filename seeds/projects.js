@@ -40,7 +40,6 @@ exports.seed = function(knex, Promise) {
           date_exp:null,
           desc:null,
           history:"Since 2015, Wheelys has sold 500+ cafés  growing faster than any café chain before us. ",
-          id:12,
           idea_prob:null,
           idea_sol:null,
           neighborhood:"Wallingford",
@@ -52,6 +51,7 @@ exports.seed = function(knex, Promise) {
           uniq_comp:"Coffee for Wheelys is what books were for Amazon. In the future, our mobile sales points will sell everything",
           use_of_funds :"We need to travel to look for more suppliers"
         }, {
+          id:3,
           amt_req:2500,
           category:"Pet Care",
           company_name:"All The Best Pet Care",
@@ -59,7 +59,6 @@ exports.seed = function(knex, Promise) {
           date_exp:null,
           desc:null,
           history:"Mosses opened their first store in 1985 on Lake City Way, carrying health and specialty foods for pets.",
-          id:9,
           idea_prob:null,
           idea_sol:null,
           img_url:"http://thinklocalseattle.org/businesses/all-the-best-pet-care-7/promoPhoto_preview",
@@ -72,6 +71,27 @@ exports.seed = function(knex, Promise) {
           uniq_comp:"provide the very best foods, supplements, and treats along with the most cuttin",
           use_of_funds:"We need to continue to market healthy food for pets and how important it is for their health.",
           user_id:9
+        }, {
+          id:4,
+          amt_req:2500,
+          category:"Coffee House",
+          company_name:"Aster Bennet's Coffee Lounge",
+          date_created:"",
+          date_exp:null,
+          desc:null,
+          history:"Perfect for morning, noon or night Aster is a true neighborhood destination.",
+          idea_prob:null,
+          idea_sol:null,
+          img_url:"https://img1.etsystatic.com/038/0/6497329/il_570xN.596734627_bzk6.jpg",
+          neighborhood:"Ballard",
+          pitch:"Neighborhood coffeehouse featuring exquisitely prepared espresso and brewed coffees, pastries & treats all baked fresh in house.",
+          prod_feat:null,
+          prod_use_cases:null,
+          status:"active",
+          targ_mkt:"Caffeine addicts",
+          uniq_comp:"Draft & bottled beers as well as a variety of wines by the glass are served. ",
+          use_of_funds:"We are needing new signs paint",
+          user_id:13
         }])
       ]);
     });
