@@ -38,7 +38,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user, done) {
   console.log('deserializing user', user);
-    done(err, user);
+    done(null, user);
 });
 
 passport.use(new StripeStrategy({

@@ -21,7 +21,7 @@ router.get('/:id', function (req, res) {
 });
 
 router.post('/', function(req, res){
-  // helpers.stripeCustCreate();
+  // helpers.stripeCustCreate();np
   queries.Users().insert({
     first_name: 'Hi',
     last_name: 'Ball',
