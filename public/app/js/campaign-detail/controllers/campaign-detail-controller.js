@@ -16,9 +16,12 @@
     var vm = this;
     vm.ended = false;
     vm.funded = false;
-    vm.currentUserId = $cookies.get('thesession');
-    console.log('the cookies:', currentUserId);
+    vm.sessionCookie= $cookies.get('session');
+    console.log(vm.sessionCookie);
+    console.log(atob(vm.sessionCookie));
+    console.log(JSON.parse(atob(vm.sessionCookie)));
     vm.campaignId = $stateParams.id;
+    vm.currentUserId = 1;
 
     CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
       vm.projectById = data;

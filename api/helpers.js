@@ -49,21 +49,24 @@ function stripeAcctRetrieve(data) {
     var stripe = require("stripe")(process.env.STRIPE);
     stripe.accounts.retrieve(data.stripe_user_id, function(err, account) {
       if (err) {
+        console.log('error retrieving acct', err);
         return reject(err);
       }
-      // queries.Users().where({stripe_acct_id: account.id}).then(function(user){
-        // if (user) {
-          // queries.Users().update({
-          //   display_name: account.display_name,
-          //   stripe_publishable_key: data.stripe_publishable_key,
-          //   stripe_access_token: account.stripe_access_token,
-          //   stripe_refresh_token: account.stripe_refresh_token
-          // }, '*').then(function(users){
-          //   resolve(users[0]);
-          // }).catch(function(err){
-          //   reject(err);
-          // })
-        // } else {
+      console.log('searching for user');
+      queries.Users().where({stripe_acct_id: account.id}).first().then(function(user){
+        if (user) {
+          queries.Users().where({id: user.id}).update({
+            display_name: account.display_name,
+            stripe_publishable_key: data.stripe_publishable_key,
+            stripe_access_token: account.stripe_access_token,
+            stripe_refresh_token: account.stripe_refresh_token
+          }, '*').then(function(users){
+            resolve(users[0]);
+          }).catch(function(err){
+            reject(err);
+          })
+        } else {
+          console.log('inserting user');
           queries.Users().insert({
             display_name: account.display_name,
             stripe_acct_id: account.id,
@@ -75,8 +78,8 @@ function stripeAcctRetrieve(data) {
           }).catch(function(err){
             reject(err);
           })
-        // }
-      // })
+        }
+      })
     })
   })
 }

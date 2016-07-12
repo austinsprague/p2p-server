@@ -20,8 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
-  name: 'thesession',
-  keys: [process.env.SESSION_KEY]
+  name: 'session',
+  keys: [process.env.SESSION_KEY],
+  httpOnly: false
 }))
 app.use(express.static('public/app'));
 app.use(passport.initialize());
@@ -48,12 +49,10 @@ passport.use(new StripeStrategy({
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
-    // var stripe = require("stripe")(process.env.STRIPE);
-    // var key = stripe_properties.stripe_publishable_key;
-    console.log('stripeProperties: ', stripe_properties);
     helpers.stripeAcctRetrieve(stripe_properties).then(function(user) {
       done(null, user);
     }).catch(function(err) {
+      console.log('error logging in', err);
       done(err);
     })
   }))
