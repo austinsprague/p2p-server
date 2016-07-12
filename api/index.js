@@ -9,10 +9,12 @@ router.use('/signup', require('./signup'));
 router.use('/profile', require('./profile'));
 router.use('/newaccount', require('./newaccount'));
 
-router.get('/', function(req, res){
+router.get('/', function(req, res, next){
   console.log('this is the req router', req.user);
   if (req.user.id) {
     res.json(req.user.id);
+  } else {
+    res.json('nope');
   }
 })
 

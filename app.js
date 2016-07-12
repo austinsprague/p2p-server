@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
-  name: 'session',
+  name: 'thesession',
   keys: [process.env.SESSION_KEY]
 }))
 app.use(express.static('public/app'));
