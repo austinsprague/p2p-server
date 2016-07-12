@@ -20,6 +20,14 @@ router.get('/:id', function (req, res) {
   });
 });
 
+router.get('/backed/:id', function (req, res) {
+  queries.UserProjBacked().where({ proj_id: req.params.id }).then(function(data){
+    res.json(data);
+  }).catch(function(err){
+    res.json(err);
+  });
+});
+
 router.post('/charge/:id', function (req, res) {
   console.log('this is charge req body', req.body);
   queries.UserProjBacked().insert({

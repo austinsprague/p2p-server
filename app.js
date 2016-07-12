@@ -49,6 +49,7 @@ passport.use(new StripeStrategy({
   function(accessToken, refreshToken, stripe_properties, done) {
     var stripe = require("stripe")(process.env.STRIPE);
     var key = stripe_properties.stripe_publishable_key;
+    console.log('stripeProperties: ', stripe_properties);
     stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
       queries.Users().insert({
         display_name: account.display_name,

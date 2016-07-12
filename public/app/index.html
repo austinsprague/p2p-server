@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang='en' data-ng-app='p2p'>
   <head>
-    <title>p2p</title>
+    <title>loconomy</title>
     <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
     <!-- inject:head:js -->
     <!-- endinject -->
     <!-- inject:html -->
     <!-- endinject -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="css/campaign/views/campaign.css">
-    <link rel="stylesheet" href="css/checkout/views/checkout.css">
-    <link rel="stylesheet" href="css/campaign-detail/views/campaign-detail.css">
     <!-- endinject -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -31,12 +28,8 @@
         <a id="logo-container" href="#" ><img ng-src="./images/logo.png" alt="logo" style="max-height:80%;"/>Loconomy</a>
         <ul class="right hide-on-med-and-down">
             <li><a ui-sref="/auth/stripe">Login | Signup</a></li>
-            <li><a ui-sref="#">Profile</a></li>
+            <li><a ui-sref="profile">Profile</a></li>
         </ul>
-        <!-- <ul id="nav-mobile" class="side-nav">
-          <li><a ng-click="">Login | Signup</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
       </div>
     </nav>
 
@@ -45,30 +38,6 @@
     <!-- </div> -->
 
     <!-- inject:js -->
-    <script src="js/signup/signup-module.js"></script>
-    <script src="js/signup/controllers/signup-controller.js"></script>
-    <script src="js/profile/profile-module.js"></script>
-    <script src="js/profile/controllers/profile-controller.js"></script>
-    <script src="js/home/home-module.js"></script>
-    <script src="js/home/controllers/home-controller.js"></script>
-    <script src="js/checkout/checkout-module.js"></script>
-    <script src="js/checkout/controllers/checkout-controller.js"></script>
-    <script src="js/campaign-detail/campaign-detail-module.js"></script>
-    <script src="js/campaign-detail/controllers/campaign-detail-controller.js"></script>
-    <script src="js/campaign/campaign-module.js"></script>
-    <script src="js/campaign/controllers/campaign-controller.js"></script>
-    <script src="js/signup/signup-service.js"></script>
-    <script src="js/signup/signup-routes.js"></script>
-    <script src="js/profile/profile-service.js"></script>
-    <script src="js/profile/profile-routes.js"></script>
-    <script src="js/home/home-routes.js"></script>
-    <script src="js/checkout/checkout-routes.js"></script>
-    <script src="js/campaign-detail/campaign-detail-service.js"></script>
-    <script src="js/campaign-detail/campaign-detail-routes.js"></script>
-    <script src="js/campaign/campaign-service.js"></script>
-    <script src="js/campaign/campaign-routes.js"></script>
-    <script src="js/app-module.js"></script>
-    <script src="js/app-routes.js"></script>
     <!-- endinject -->
 
 

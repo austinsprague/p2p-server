@@ -9,13 +9,10 @@ exports.up = function(knex, Promise) {
     table.string('phone_num');
     table.text('background');
     table.string('email');
-    table.string('pwd');
     table.integer('zip');
     table.string('display_name');
     table.text('stripe_acct_id');
     table.text('stripe_cust_id');
-    // table.text('stripe_key_secret');
-    table.text('stripe_publishable_key');
   })
 };
 
