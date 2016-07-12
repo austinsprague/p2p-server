@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["campaign/campaign-module.js"],"sourcesContent":["(function () {\n  'use strict';\n\n  /* @ngdoc object\n   * @name campaign\n   * @description\n   *\n   */\n  angular\n    .module('campaign', [\n      'ui.router'\n    ]);\n}());\n"],"file":"campaign/campaign-module.js","sourceRoot":"/source/"}

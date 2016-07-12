@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["home/home-module.js"],"sourcesContent":["(function () {\n  'use strict';\n\n  /* @ngdoc object\n   * @name home\n   * @description\n   *\n   */\n  angular\n    .module('home', [\n      'ui.router',\n      'ngCookies'\n    ]);\n}());\n"],"file":"home/home-module.js","sourceRoot":"/source/"}

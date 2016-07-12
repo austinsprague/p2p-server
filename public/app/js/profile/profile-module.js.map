@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["profile/profile-module.js"],"sourcesContent":["(function () {\n  'use strict';\n\n  /* @ngdoc object\n   * @name profile\n   * @description\n   *\n   */\n  angular\n    .module('profile', [\n      'ui.router',\n      'ngCookies'\n    ]);\n}());\n"],"file":"profile/profile-module.js","sourceRoot":"/source/"}
