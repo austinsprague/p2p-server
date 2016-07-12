@@ -4,9 +4,11 @@ var account_id = process.env.PLATFORM_ACCOUNT_ID;
 
 
 function stripeCharge(backer) {
-  return queries.Users().where({id: backer.backer_id})
+  console.log('this is the backer');
+  queries.Users().where({id: backer.backer_id})
   .then(function(cust){
     var token = stripeCreateToken().card.id;
+    console.log(token);
     console.log('the card is', stripeCreateToken().card.id);
     console.log('token is ', token);
     return stripe.charges.create({
@@ -49,21 +51,21 @@ function stripeAcctRetrieve(data) {
       if (err) {
         return reject(err);
       }
-      queries.Users().where({stripe_acct_id: account.id}).then(function(user){
-        if (user) {
-          queries.Users().update({
-            display_name: account.display_name,
-            stripe_publishable_key: data.stripe_publishable_key,
-            stripe_access_token: account.stripe_access_token,
-            stripe_refresh_token: account.stripe_refresh_token
-          }, '*').then(function(users){
-            resolve(users[0]);
-          }).catch(function(err){
-            reject(err);
-          })
-        } else {
+      // queries.Users().where({stripe_acct_id: account.id}).then(function(user){
+        // if (user) {
+          // queries.Users().update({
+          //   display_name: account.display_name,
+          //   stripe_publishable_key: data.stripe_publishable_key,
+          //   stripe_access_token: account.stripe_access_token,
+          //   stripe_refresh_token: account.stripe_refresh_token
+          // }, '*').then(function(users){
+          //   resolve(users[0]);
+          // }).catch(function(err){
+          //   reject(err);
+          // })
+        // } else {
           queries.Users().insert({
-            first_name: account.display_name,
+            display_name: account.display_name,
             stripe_acct_id: account.id,
             stripe_publishable_key: account.stripe_publishable_key,
             stripe_access_token: account.stripe_access_token,
@@ -73,8 +75,8 @@ function stripeAcctRetrieve(data) {
           }).catch(function(err){
             reject(err);
           })
-        }
-      })
+        // }
+      // })
     })
   })
 }
@@ -82,5 +84,4 @@ function stripeAcctRetrieve(data) {
 module.exports = {
   stripeCharge,
   stripeAcctRetrieve
-  // stripeTransfer
 }

@@ -35,11 +35,12 @@ router.post('/charge/:id', function (req, res) {
       amt_pledged: req.body.amount,
       user_id: req.body.user_id
   }).then(function(data){
+    console.log(data);
+    console.log('body is :', req.body);
+    return helpers.stripeCharge(req.body).then(function(data){
+      res.json('successful user backed');
+    })
     res.json(data);
-    console.log('this is data', data);
-    // return helpers.stripeCharge(req.body).then(function(data){
-    //   res.json('successful user backed');
-    // })
   }).catch(function(err){
     res.json(err);
   });

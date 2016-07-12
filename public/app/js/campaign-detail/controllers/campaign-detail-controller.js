@@ -16,7 +16,8 @@
     var vm = this;
     vm.ended = false;
     vm.funded = false;
-    vm.currentUserId = $cookies.getObject('user') || 1;
+    vm.currentUserId = $cookies.get('thesession');
+    console.log('the cookies:', currentUserId);
     vm.campaignId = $stateParams.id;
 
     CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
@@ -54,16 +55,11 @@
       vm.userCharge.proj_id = vm.campaignId;
       vm.userCharge.amount = amount;
       vm.userCharge.user_id = vm.campaignUserId;
-      console.log('this is charge object' , vm.userCharge);
-
 
       $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
       .then(function(user){
         console.log('this is user', user);
-        // vm.amtPledged = vm.amtPledged + parseInt(user.data.amount);
-        // vm.backerCount = vm.backerCount + 1;
         $state.go('profile');
-        // return user;
       })
     }
   }
