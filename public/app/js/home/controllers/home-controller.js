@@ -12,55 +12,22 @@
     .module('home')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl($state, $stateParams, $cookies, $http) {
+  function HomeCtrl($state, $cookies, $http, $scope) {
     var vm = this;
     var loggedin = true;
-    // vm.getCookies = $cookies.get('session');
-    // console.log(vm.getCookies);
-    vm.allCookies = $cookies.getAll();
-    console.log(vm.allCookies);
-    var cookies = $cookies.getObject('user');
-    console.log('the cookies', cookies);
 
 
-    (function currentUser(){
-      return $http.get('api/').then(function(user){
-        // loggedin = !loggedin;
-        if (loggedin) {
-          $cookies.putObject('user', user.data);
-        } else {
-          $cookies.remove('user')
-        }
-      })
-    }());
-
-    // vm.login = function(){
-    //   loggedin = !loggedin;
-    //   if (loggedin) {
-    //     $cookies.put('session', '{id:15, display_name:austin_s}');
-    //     vm.cookieValue = $cookies.get('session');
-    //     console.log(vm.cookieValue);
-    //   } else {
-    //
-    //   }
+    // function currentUser(){
+    //   return $http.get('api/').then(function(user){
+    //     console.log('this ist he api call:', user);
+    //     // loggedin = !loggedin;
+    //     // if (loggedin) {
+    //       $cookies.putObject('user', user.data);
+    //     // } else {
+    //     //   $cookies.remove('user')
+    //     // }
+    //   })
     // }
-    // //
-    // $cookieStore.put('user', '');
-    // vm.cookieValue = $cookieStore.get('session');
-    // console.log(vm.cookieValue);
-
-
-    // $cookieStore.session= 'hello';
-    // alert(vm.$cookieStore.session);
-    //
-    // vm.lastVal = vm.$cookieStore.get('session');
-    // console.log(vm.lastVal);
-
-      // $scope.changeTab = function(tabName){
-      // $scope.lastVal = tabName;
-      // $cookieStore.put('tab', tabName);
-
-
   }
 }());
 

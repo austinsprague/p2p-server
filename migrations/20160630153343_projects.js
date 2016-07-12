@@ -20,6 +20,7 @@ exports.up = function(knex, Promise) {
     table.string('date_created');
     table.string('date_exp');
     table.string('status');
+    table.integer('amt_req');
   })
 };
 

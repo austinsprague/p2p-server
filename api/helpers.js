@@ -4,77 +4,37 @@ var account_id = process.env.PLATFORM_ACCOUNT_ID;
 
 
 function stripeCharge(backer) {
-  // console.log(backer);
-  return queries.Users().select('stripe_cust_id').where({id: backer.backer_id}).first()
-  .then(function(custId){
+  return queries.Users().where({id: backer.backer_id})
+  .then(function(cust){
+    var token = stripeCreateToken().card.id;
+    console.log('the card is', stripeCreateToken().card.id);
+    console.log('token is ', token);
     return stripe.charges.create({
-      amount: backer.amount,
+      amount: cust.amount,
       currency: "usd",
       description: "Charge for test@example.com",
-      source: 'cus_8liNI7MubfAfRg'
-      // destination: 'acct_18URMBGuRV8d6Wi4'
+      source: token
       })
-    }).then(function(data){
-      return queries.UserProjBacked().insert({
-        user_id: data.customer.id, // change user_id to stripe_cust_id
-        proj_id: backer.proj_id,
-        amt_pledged: data.amount,
-        token: data.id
-            // insert funds_captured later
-      });
-    return data.id;
   }).catch(function(err, charge) {
     console.log('this is the error:' + err);
     console.log('this is the charge' + charge);
   });
 }
 
-// function stripeTransfer(projectId) {
-//   console.log('projectID' + projectID);
-
-  // return queries.UserProjBacked().select().where({proj_id: projectId}).then(function(data){
-  //   console.log(data);
-    // return stripe.recipients.create({
-    //   name:
-    //   type: 'individual',
-    //   card: token,
-    //   metadata: {
-    //     charge_user_id: custId.stripe_cust_id
-    //   }
-    // })
-    // .then(function(data){
-    //   return queries.UserProjBacked().insert({
-    //     user_id: data.customer.id, // change user_id to stripe_cust_id
-    //     proj_id: backer.proj_id,
-    //     amt_pledged: data.amount,
-    //     token: data.id
-    //   });
-    //   return data.id;
-    // })
-  // }).catch(function(err, charge) {
-    // console.log('this is the error:' + err);
-  // });
-// };
-
-function stripeCustCreate(token, email) {
-  return stripe.customers.create({
-    source : token,
-    description : email
-  })
-}
-
-function stripeAcctCharge(receiver_token, amount, destination) {
-  //create a new token using the 
-  stripe.charges.create({
-    amount: amount,
-    currency: 'usd',
-    source: receiver_token,
-    destination: destination
-  }, function(err, charge) {
-    console.log('charged' + charge);
-    console.log('the error' + err);
-  });
-}
+// function stripeCreateToken(){
+//   stripe.tokens.create({
+//     card: {
+//       "number": '4242424242424242',
+//       "exp_month": 12,
+//       "exp_year": 2017,
+//       "cvc": '123'
+//     }
+//   }, stripeResHandler)
+// }
+//
+// function stripeResHandler(status, res) {
+//   console.log(res);
+// }
 
 function stripeAcctRetrieve(acct_num, data) {
   stripe.accounts.retrieve(acct_num, function(err, account) {
@@ -95,8 +55,7 @@ function stripeAcctRetrieve(acct_num, data) {
 
 module.exports = {
   stripeCharge,
-  stripeCustCreate,
-  stripeAcctRetrieve,
-  stripeAcctCharge
+  // stripeCustCreate,
+  stripeAcctRetrieve
   // stripeTransfer
 }

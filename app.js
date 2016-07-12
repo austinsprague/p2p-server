@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
-  name: 'user_session',
+  name: 'session',
   keys: [process.env.SESSION_KEY]
 }))
 app.use(express.static('public/app'));
@@ -38,7 +38,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(user, done) {
   console.log('deserializing user', user);
-  done(null, user)
+    done(err, user);
 });
 
 passport.use(new StripeStrategy({
@@ -49,13 +49,13 @@ passport.use(new StripeStrategy({
   function(accessToken, refreshToken, stripe_properties, done) {
     var stripe = require("stripe")(process.env.STRIPE);
     var key = stripe_properties.stripe_publishable_key;
+    console.log('stripeProperties: ', stripe_properties);
     stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
       queries.Users().insert({
         display_name: account.display_name,
         stripe_acct_id: account.id,
         stripe_publishable_key: key
       }, 'id').then(function(ids) {
-
         done(null, {id: ids[0]});
       });
     });
@@ -67,11 +67,11 @@ app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' })
 app.get('/auth/stripe/callback',
   passport.authenticate('stripe', { failureRedirect: '/#/home'}),
   function(req, res) {
+    console.log(req.user);
     console.log('redirect success');
     res.redirect('/#/home')
   }
 )
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

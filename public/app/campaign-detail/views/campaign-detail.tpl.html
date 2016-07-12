@@ -1,4 +1,10 @@
 <div class="container">
+<style>
+  /*div {
+    border:solid black 1px;
+  }*/
+</style>
+
   <div class="row" style="margin-top:5%">
     <div class="col l8">
       <h5>{{campaignDetail.company_name}}</h5>
@@ -8,19 +14,76 @@
       <div class="chip">California</div>
       <div class="chip">San Francisco</div>
     </div>
-  <div class="row">
-    <div class="col l8" style="width 100%">
-      <img src="{{campaignDetail.img_url}}" alt="" />
-    </div>
-    <div class="col l4">
-      <ul class="collection with-header">
-        <li class="collection-header"><h4>Title</h4></li>
-        <li class="collection-item"><div>Days Left</div></li>
-        <li class="collection-item"><div>Number of supporters</div></li>
-        <li class="collection-item"><div class="progress"><div class="determinate" style="width: 70%"></div></div></li>
-      </ul>
-      <input type="number"></input>
-      <a class="waves-effect orange btn-flat" ng-click="campaignDetail.createUserCharge()">Support</a>
+    <div class="row">
+      <div class="col l8" >
+        <div style="height:300px"><img src="{{campaignDetail.img_url}}" alt="" style="max-height:100%" /></div>
+      </div>
+      <div class="col l4">
+        <ul class="collection with-header">
+          <li class="collection-header"><h4>{{campaignDetail.amtPledged}} Pledged</h4></li>
+          <li class="collection-item"><div>14 Days Left!</div></li>
+          <li class="collection-item"><div>{{campaignDetail.backerCount}} Backers</div></li>
+          <li class="collection-item"><div class="progress"><div class="determinate" style="width: 70%"></div></div></li>
+        </ul>
+        <div class="row">
+          <div class="col l6">
+            <form class="" method="post">
+
+            <!-- <label>Browser Select</label> -->
+            <select class="browser-default" ng-model="userCharge">
+              <option value="" disabled selected>$ choose</option>
+              <option value="1000">$10</option>
+              <option value="2000">$20</option>
+              <option value="3000">$30</option>
+            </select>
+            <a class="waves-effect orange btn-flat" ng-click="campaignDetail.createUserCharge(userCharge)" style="height:100%">Support</a>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+  <!-- info area -->
+  <!-- <div class="row">
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Use of Funds</span>
+          <p>{{campaignDetail.use_of_funds}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Use of Funds</span>
+          <p>{{campaignDetail.use_of_funds}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s9 m3">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Use of Funds</span>
+          <p>{{campaignDetail.use_of_funds}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s9 m3">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Use of Funds</span>
+          <p>{{campaignDetail.use_of_funds}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s9 m3">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text flat">
+          <span class="card-title">Use of Funds</span>
+          <p>{{campaignDetail.use_of_funds}}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->

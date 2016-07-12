@@ -26,6 +26,7 @@ router.get('/user/:id', function (req, res) {
   });
 });
 
+
 router.get('/update/:id', function (req, res) {
   queries.Projects().where({ id: req.params.id }).first().then(function(data){
     res.json(data);
@@ -35,21 +36,25 @@ router.get('/update/:id', function (req, res) {
 });
 
 router.post('/insert/:id', function(req, res){
-  console.log('this is the server req:', req.body);
+  var date = Date.now();
   queries.Projects().insert({
     company_name: req.body.company_name,
     user_id: req.params.id,
     img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
-    desc: req.body.desc,
-    pitch: req.body.pitch,
-    prod_feat: req.body.prod_feat,
+    // desc: req.body.desc,
+    // pitch: req.body.pitch,
+    // prod_feat: req.body.prod_feat,
+    idea_prob: req.body.idea_prob,
+    idea_sol: req.body.idea_sol,
     targ_mkt: req.body.targ_mkt,
     uniq_comp: req.body.uniq_comp,
     history: req.body.history,
     use_of_funds: req.body.use_of_funds,
     date_created: req.body.date_created,
     date_exp: req.body.date_exp,
-    status: req.body.status
+    status: 'active',
+    date_created: date,
+    amt_req: 3000
   }).then(function(){
     console.log('successful insert');
     res.json('success');
@@ -58,16 +63,7 @@ router.post('/insert/:id', function(req, res){
   })
 });
 
-// router.post('/create/:id', function(req, res){
-//   console.log('this is the req', req.body);
-//   queries.insertProjects(req.body, req.params.id)
-//   .then(function(){
-//     console.log('successful insert');
-//     res.json('success');
-//   }).catch(function(err){
-//     res.json(err);
-//   })
-// })
+
   // queries.Projects().insert({
   //   company_name: req.body.company_name,
   //   user_id: req.params.id,

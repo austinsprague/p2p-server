@@ -23,15 +23,14 @@ router.get('/:id', function (req, res) {
 router.post('/', function(req, res){
   // helpers.stripeCustCreate();
   queries.Users().insert({
-    first_name: 'NEW',
-    last_name: 'user',
-    address: '111 Pine St',
+    first_name: 'Hi',
+    last_name: 'Ball',
+    address: '9000 Crazy Brick Lane',
     city: 'SF',
     state: 'CA',
-    phone_num: 2069991123,
+    phone_num: 4159990909,
     background: 'Garlic lover',
-    email: 'guy@yahoo.com',
-    pwd: '123456'
+    email: 'dude@yolo.com',
   }).then(function(){
     res.json(data);
   }).catch(function(err){
@@ -42,12 +41,11 @@ router.post('/', function(req, res){
 
 router.put('/:id/update', function (req, res) {
   queries.Users().where({ id: req.params.id }).update({
-    name: 'Betty Boop',
-    address: '111 Pine St, SF CA',
-    phone_num: 2069991123,
+    // name: 'Betty Boop',
+    // address: '111 Pine St, SF CA',
+    // phone_num: 2069991123,
     background: 'Ultimate baking champion',
-    username: 'betty_shop',
-    password: '123456'
+    display_name: 'austin_s'
   }).then(function(data){
     res.json('successful update');
   }).catch(function(err){

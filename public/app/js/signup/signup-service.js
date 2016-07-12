@@ -47,9 +47,9 @@
           }
         return user;
         },
-        authUser: function(user) {
-          return $http.get('/auth/stripe')
-        },
+        // authUser: function(user) {
+        //   return $http.get('/auth/stripe')
+        // },
         loggedIn: function() {
           return $http.get('/users/loggedIn')
         }

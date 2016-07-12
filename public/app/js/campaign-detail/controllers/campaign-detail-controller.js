@@ -12,45 +12,49 @@
     .module('campaignDetail')
     .controller('CampaignDetailCtrl', CampaignDetailCtrl);
 
-  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http) {
+  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http, $cookies) {
     var vm = this;
     vm.ended = false;
     vm.funded = false;
+    vm.currentUserId = $cookies.getObject('user') || 1;
+    vm.campaignId = $stateParams.id;
 
-    CampaignDetailService.getProjectsById($stateParams.id).then(function(data) {
+    CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
       vm.projectById = data;
+      vm.campaignUserId = data.user_id;
       vm.company_name = data.company_name;
       vm.img_url = data.img_url;
+      vm.pitch = data.pitch;
+      vm.city = data.city;
+      vm.neighborhood = data.neighborhood;
+      vm.target_market = data.target_market;
+      vm.history = data.history;
+      vm.use_of_funds = data.use_of_funds;
+      vm.status = data.status;
     });
+    CampaignDetailService.getBackedInfo(vm.campaignId).then(function(data){
+      vm.backerCount = data.length;
+      for (var i = 0; i < data.length; i++) {
+        vm.amtPledged = data[i].amt_pledged;
+      }
+    })
 
-    // setInterval(FetchData(vm.ended),1000);
-
-    vm.campaignEnd = function(){
-      console.log('button clicked');
-      vm.ended = true;
-      vm.funded = true;
-      $http.post('/api/user_projects/' + $stateParams.id + '/transfer')
-      .then(function(data){
-        console.log('posted');
-        return data;
-      })
-    };
-    //   CampaignDetailService.fundCampaign($stateParams.id).then(function(){
-    //     console.log('this is funded');
-    //   });
-    // };
-
-    vm.createUserCharge = function(){
+    vm.createUserCharge = function(amount){
       vm.userCharge = {};
-      vm.userCharge.backer_id = 6;
-      vm.userCharge.proj_id = 4;
-      vm.userCharge.amount = 1000;
-      vm.userCharge.user_id = 3;
+      vm.userCharge.backer_id = vm.currentUserId;
+      vm.userCharge.proj_id = vm.campaignId;
+      vm.userCharge.amount = amount;
+      vm.userCharge.user_id = vm.campaignUserId;
+      console.log('this is charge object' , vm.userCharge);
 
-      $http.post('/api/user_projects/' + vm.userCharge.proj_id + '/charge', vm.userCharge)
+
+      $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
       .then(function(user){
-        console.log('posted');
-        return user;
+        console.log('this is user', user);
+        // vm.amtPledged = vm.amtPledged + parseInt(user.data.amount);
+        // vm.backerCount = vm.backerCount + 1;
+        $state.go('profile')
+        // return user;
       })
     }
   }

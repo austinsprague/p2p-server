@@ -6,6 +6,7 @@
     .config(config)
 
   function config($urlRouterProvider, $httpProvider) {
+
     $urlRouterProvider.otherwise('/home');
     $httpProvider.defaults.withCredentials = true;
   }

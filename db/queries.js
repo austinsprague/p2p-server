@@ -4,6 +4,9 @@ var knex = require('./knex')
 function Users(){
   return knex('users');
 }
+function UsersById(id){
+  return knex('users').where({ id: id }).select();
+}
 function UsersByAcct(id){
   return knex('users').where({stripe_acct_id: id}).select();
 }
@@ -54,5 +57,6 @@ module.exports= {
   Projects,
   UserProjBacked,
   UserProjects,
-  UserBacked
+  UserBacked,
+  UsersById
 };
