@@ -26,26 +26,17 @@ router.get('/user/:id', function (req, res) {
   });
 });
 
-
-router.get('/update/:id', function (req, res) {
-  queries.Projects().where({ id: req.params.id }).first().then(function(data){
-    res.json(data);
-  }).catch(function(err){
-    res.json(err);
-  });
-});
-
 router.post('/insert/:id', function(req, res){
-  var date = Date.now();
+  console.log(req.body);
   queries.Projects().insert({
     company_name: req.body.company_name,
     user_id: req.params.id,
-    img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
+    img_url: req.body.img_url,
     // desc: req.body.desc,
-    // pitch: req.body.pitch,
-    // prod_feat: req.body.prod_feat,
-    idea_prob: req.body.idea_prob,
-    idea_sol: req.body.idea_sol,
+    category: req.body.category,
+    // city: req.body.city,
+    neighborhood: req.body.neighborhood,
+    pitch: req.body.pitch,
     targ_mkt: req.body.targ_mkt,
     uniq_comp: req.body.uniq_comp,
     history: req.body.history,
@@ -53,8 +44,8 @@ router.post('/insert/:id', function(req, res){
     date_created: req.body.date_created,
     date_exp: req.body.date_exp,
     status: 'active',
-    date_created: date,
-    amt_req: 3000
+    date_created: '',
+    amt_req: 2500
   }).then(function(){
     console.log('successful insert');
     res.json('success');
@@ -63,38 +54,25 @@ router.post('/insert/:id', function(req, res){
   })
 });
 
-
-  // queries.Projects().insert({
-  //   company_name: req.body.company_name,
-  //   user_id: req.params.id,
-  //   img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
-  //   desc: 'Hippest spot in town',
-  //   pitch:'Get it',
-  //   prod_feat:'Cool interior duh' ,
-  //   targ_mkt: 'The truck has been privileged to serve patrons at well-known corporations and events like Capitol Records, Mattel, The Grammys, and E3 Expo, as well as participating in countless fundraising events for schools, churches, and non-profit organizations. ',
-  //   uniq_comp:'Get that jam on' ,
-  //   history: 'After establishing a name for themselves in their brick & mortar location in Ontario, My Delight Cupcakery launched a gourmet food truck in September of 2011. Since its debut, the truck has frequented numerous cities in the Los Angeles County, Orange County, as well as in their home-base of San Bernardino County.',
-  //   use_of_funds: 'Need to jam all night',
-  //   date_created: 'May 25 2016',
-  //   date_exp: '45 days',
-  //   status: 'active'
-// });
-
-router.put('/:id/update', function (req, res) {
+router.put('/update/:id', function (req, res) {
   queries.Projects().where({ id: req.params.id }).update({
-    company_name: 'Betty\'s Bakeshop',
-    user_id: 1,
-    img_url: 'http://del.h-cdn.co/assets/15/44/black-forest-cupcakes4-edit4srgb.jpg',
-    desc: 'Making delious cupcakes all the time!',
-    pitch:'Need more trucks to fill the bellies of people wherever they are!',
-    product_features:'Inside the custom-built My Delight Truck, one will find an impressive gourmet kitchen on wheels. Stainless steel from floor to ceiling, this kitchen features the expected refrigerator, freezer, and sink, but also custom-built stainless steel racks that can securely hold thousands of cupcakes for travel.' ,
-    target_market: 'The truck has been privileged to serve patrons at well-known corporations and events like Capitol Records, Mattel, The Grammys, and E3 Expo, as well as participating in countless fundraising events for schools, churches, and non-profit organizations. ',
-    unique_comp:'My Delight is often complimented on the truck’s design and was recently dubbed “Best Looking Truck” by a popular vote organized by Fred Duran of Freddy’s Food Court. What fans love best about the truck, however, isn’t on the outside; it’s the award-winning cupcakes that keep people lining up.' ,
-    history: 'After establishing a name for themselves in their brick & mortar location in Ontario, My Delight Cupcakery launched a gourmet food truck in September of 2011. Since its debut, the truck has frequented numerous cities in the Los Angeles County, Orange County, as well as in their home-base of San Bernardino County.',
-    use_of_funds: 'Need more trucks to fill the bellies of people wherever they are!',
-    date_created: 'May 25 2016',
-    date_expires: '45 days',
-    status: 'active'
+    company_name: req.body.company_name,
+    user_id: req.params.id,
+    img_url: req.body.img_url,
+    // desc: req.body.desc,
+    category: req.body.category,
+    // city: req.body.city,
+    neighborhood: req.body.neighborhood,
+    pitch: req.body.pitch,
+    targ_mkt: req.body.targ_mkt,
+    uniq_comp: req.body.uniq_comp,
+    history: req.body.history,
+    use_of_funds: req.body.use_of_funds,
+    date_created: req.body.date_created,
+    date_exp: req.body.date_exp,
+    status: req.body.status,
+    date_created: req.body.date_created,
+    amt_req: req.body.amt_req
   }).then(function(data){
     res.json('successful update');
     res.redirect(data);
@@ -103,7 +81,7 @@ router.put('/:id/update', function (req, res) {
   });
 });
 
-router.delete('/:id/delete', function(req, res) {
+router.delete('/delete/:id', function(req, res) {
   queries.Projects().where({ id: req.params.id }).del().then(function(){
     res.json('successful delete');
   }).catch(function(err){

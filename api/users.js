@@ -41,11 +41,14 @@ router.post('/', function(req, res){
 
 router.put('/:id/update', function (req, res) {
   queries.Users().where({ id: req.params.id }).update({
-    // name: 'Betty Boop',
-    // address: '111 Pine St, SF CA',
-    // phone_num: 2069991123,
-    background: 'Ultimate baking champion',
-    display_name: 'austin_s'
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    phone_num: req.body.phone_number,
+    background: req.body.background,
+    email: req.body.email,
   }).then(function(data){
     res.json('successful update');
   }).catch(function(err){

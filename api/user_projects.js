@@ -29,7 +29,6 @@ router.get('/backed/:id', function (req, res) {
 });
 
 router.post('/charge/:id', function (req, res) {
-  console.log('this is charge req body', req.body);
   queries.UserProjBacked().insert({
       charge_stripe_cust_id: req.body.backer_id,
       proj_id: req.body.proj_id,

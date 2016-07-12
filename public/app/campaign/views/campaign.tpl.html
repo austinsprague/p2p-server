@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row" style="margin-top:5%">
-  <h5>Browse Companies</h3>
-  <div class="divider"></div>
+    <h5>Browse Companies</h3>
+    <div class="divider"></div>
   </div>
   <div class="row">
-    <div class="col l5" ng-repeat="project in campaign.projects">
-      <div class="card small hoverable">
-        <div class="card-image" style="height:300px;">
+    <div class="col s12 m6 " ng-repeat="project in campaign.projects">
+      <div class="card hoverable medium">
+        <div class="card-image" style="height:400px;">
           <img src="{{project.img_url}}" style="height:100%;">
-          <span class="card-title teal-text">{{project.company_name}}</span>
+          <span class="card-title white-text" style="background-color:black; color:white;">{{project.company_name}}</span>
         </div>
         <div class="card-content">
-          <p>{{project.history}}</p>
+          <p style="text-transform:capitalize;">{{project.history | limitTo:175}}</p>
         </div>
         <div class="card-action">
           <a ui-sref="campaignDetail({id: project.id})">Learn More</a>

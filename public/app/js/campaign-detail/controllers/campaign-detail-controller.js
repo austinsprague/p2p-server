@@ -24,13 +24,20 @@
       vm.campaignUserId = data.user_id;
       vm.company_name = data.company_name;
       vm.img_url = data.img_url;
-      vm.pitch = data.pitch;
-      vm.city = data.city;
+      vm.category = data.category;
       vm.neighborhood = data.neighborhood;
-      vm.target_market = data.target_market;
-      vm.history = data.history;
-      vm.use_of_funds = data.use_of_funds;
       vm.status = data.status;
+      vm.info = [];
+      angular.forEach(data, function(value, key) {
+        var titles = ['pitch', 'targ_mkt','uniq_comp', 'history', 'use_of_funds']
+        if (value && titles.includes(key)) {
+          var obj = {
+            title: key.replace(/_/g, " "),
+            details: value
+          }
+          this.push(obj);
+        }
+      }, vm.info);
     });
     CampaignDetailService.getBackedInfo(vm.campaignId).then(function(data){
       vm.backerCount = data.length;

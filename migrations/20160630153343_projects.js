@@ -3,11 +3,11 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('company_name');
     table.integer('user_id');
-    table.integer('rec_stripe_cust_id');
     table.text('img_url');
     table.text('desc');
     table.string('category');
     table.string('neighborhood');
+    table.string('city');
     table.text('pitch');
     table.text('idea_prob');
     table.text('idea_sol');
