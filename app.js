@@ -50,17 +50,20 @@ passport.use(new StripeStrategy({
     var stripe = require("stripe")(process.env.STRIPE);
     var key = stripe_properties.stripe_publishable_key;
     console.log('stripeProperties: ', stripe_properties);
-    stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
-      queries.Users().insert({
-        display_name: account.display_name,
-        stripe_acct_id: account.id,
-        stripe_publishable_key: key
-      }, 'id').then(function(ids) {
-        done(null, {id: ids[0]});
-      });
-    });
-  }
-));
+    // stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
+    //   console.log('this is account', account);
+    //   queries.Users().insert({
+    //     display_name: account.display_name,
+    //     stripe_acct_id: account.id,
+    //     stripe_publishable_key: key
+    //   }, 'id')
+      // .then(function(ids) {
+        // done(null, {id: ids[0]});
+        done(null, stripe_properties)
+    //   };
+    // };
+  }))
+// ));
 
 
 app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }));
