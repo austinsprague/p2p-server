@@ -21,6 +21,7 @@
 
     CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
       vm.projectById = data;
+      console.log(vm.projectById);
       vm.campaignUserId = data.user_id;
       vm.company_name = data.company_name;
       vm.img_url = data.img_url;
@@ -41,8 +42,9 @@
     });
     CampaignDetailService.getBackedInfo(vm.campaignId).then(function(data){
       vm.backerCount = data.length;
+      vm.amtPledged = 0;
       for (var i = 0; i < data.length; i++) {
-        vm.amtPledged = data[i].amt_pledged;
+        vm.amtPledged += data[i].amt_pledged;
       }
     })
 
@@ -60,7 +62,7 @@
         console.log('this is user', user);
         // vm.amtPledged = vm.amtPledged + parseInt(user.data.amount);
         // vm.backerCount = vm.backerCount + 1;
-        $state.go('profile')
+        $state.go('profile');
         // return user;
       })
     }

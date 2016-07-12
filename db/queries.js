@@ -58,5 +58,6 @@ module.exports= {
   UserProjBacked,
   UserProjects,
   UserBacked,
-  UsersById
+  UsersById,
+  UsersByAcct
 };

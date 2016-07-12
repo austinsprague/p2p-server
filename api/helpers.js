@@ -36,20 +36,38 @@ function stripeCharge(backer) {
 //   console.log(res);
 // }
 
-function stripeAcctRetrieve(acct_num, data) {
-  stripe.accounts.retrieve(acct_num, function(err, account) {
-    if (queries.UsersByAcct(acct_num)) {
-      queries.Users().update(data);
-    }
-    else {
-    queries.Users().insert({
-      first_name: account.display_name,
-      stripe_acct_id: account.id
+function stripeAcctRetrieve(data) {
+  console.log('data', data);
+  return new Promise(function(resolve, reject){
+    var stripe = require("stripe")(process.env.STRIPE);
+    stripe.accounts.retrieve(data.stripe_user_id, function(err, account) {
+      if (err) {
+        return reject(err);
+      }
+      queries.Users().where({stripe_acct_id: account.id}).then(function(user){
+        if (user) {
+          queries.Users().update({
+            display_name: account.display_name,
+            stripe_acct_id: account.id,
+            stripe_publishable_key: data.stripe_publishable_key
+          }, '*').then(function(users){
+            resolve(users[0]);
+          }).catch(function(err){
+            reject(err);
+          })
+        } else {
+          queries.Users().insert({
+            first_name: account.display_name,
+            stripe_acct_id: account.id,
+            stripe_publishable_key: account.stripe_publishable_key
+          }, '*').then(function(users) {
+            resolve(users[0]);
+          }).catch(function(err){
+            reject(err);
+          })
+        }
       })
-    }
-  }).then(function(data) {
-    console.log('the account is: ' ,data);
-    done(null, account);
+    })
   })
 }
 

@@ -11,7 +11,8 @@ var knex = require('./db/knex');
 var passport = require('passport');
 var StripeStrategy = require('passport-stripe').Strategy;
 var stripe = require("stripe")(process.env.STRIPE);
-var queries = require("./db/queries")
+var queries = require("./db/queries");
+var helpers = require("./api/helpers")
 require('dotenv').load();
 
 app.use(logger('dev'));
@@ -47,23 +48,15 @@ passport.use(new StripeStrategy({
     callbackURL: process.env.HOST + "/auth/stripe/callback"
   },
   function(accessToken, refreshToken, stripe_properties, done) {
-    var stripe = require("stripe")(process.env.STRIPE);
-    var key = stripe_properties.stripe_publishable_key;
+    // var stripe = require("stripe")(process.env.STRIPE);
+    // var key = stripe_properties.stripe_publishable_key;
     console.log('stripeProperties: ', stripe_properties);
-    // stripe.accounts.retrieve(stripe_properties.stripe_user_id, function(err, account) {
-    //   console.log('this is account', account);
-    //   queries.Users().insert({
-    //     display_name: account.display_name,
-    //     stripe_acct_id: account.id,
-    //     stripe_publishable_key: key
-    //   }, 'id')
-      // .then(function(ids) {
-        // done(null, {id: ids[0]});
-        done(null, stripe_properties)
-    //   };
-    // };
+    helpers.stripeAcctRetrieve(stripe_properties).then(function(user) {
+      done(null, user);
+    }).catch(function(err) {
+      done(err);
+    })
   }))
-// ));
 
 
 app.get('/auth/stripe', passport.authenticate('stripe', { scope: 'read_write' }));

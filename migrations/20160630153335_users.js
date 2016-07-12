@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
     table.string('display_name');
     table.text('stripe_acct_id');
     table.text('stripe_cust_id');
+    table.text('stripe_publishable_key');
   })
 };
 
