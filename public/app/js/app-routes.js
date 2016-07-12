@@ -7,6 +7,10 @@
 
   function config($urlRouterProvider, $httpProvider) {
 
+    // .state('home', {
+    //   url: '/home'
+    // }
+
     $urlRouterProvider.otherwise('/home');
     $httpProvider.defaults.withCredentials = true;
   }
