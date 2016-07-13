@@ -12,7 +12,6 @@
       // 'angularPayments',
       'angular-stripe',
       'ngCookies'
-      // 'stripe'
     ]);
 }());
 

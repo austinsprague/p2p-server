@@ -6,7 +6,7 @@ var account_id = process.env.PLATFORM_ACCOUNT_ID;
 function stripeCharge(backer) {
   console.log('this is the backer');
   queries.Users().where({id: backer.backer_id})
-  .then(function(cust){
+  .first().then(function(cust){
     var token = stripeCreateToken().card.id;
     console.log(token);
     console.log('the card is', stripeCreateToken().card.id);

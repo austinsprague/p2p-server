@@ -1,10 +1,13 @@
 <div class="container">
-  <div class="row">
-    <h6>{{profile.display_name}}</h6>
+  <div class="row" style="margin-top:5%">
+    <h5 style="text-transform:uppercase;">Hello, {{profile.display_name}}!</h5>
+    <div class="divider"></div>
   </div>
-  <!-- <h4>Your Campaigns</h4> -->
+  <!-- <div class="row"> -->
+    <a ui-sref="campaign">Browse Projects</a>
+  <!-- </div> -->
   <div class="row" id="backed">
-    <div class="row">
+    <div class="row" ng-show="profile.backedProj">
       <h5>Campaigns you've backed!</h5>
     </div>
     <div class="row">
@@ -20,15 +23,17 @@
       </ul>
     </div>
   </div>
-  <div class="row" id="projects">
-    <div class="col l11">
-      <h5>Active Campaigns</h5>
+  <div class="row">
+    <div class="col s9">
+      <h5 ng-show="profile.projects.id">Active Campaigns</h5>
+      <h5 ng-show="profile.projects">You have no active campaigns</h5>
     </div>
-    <div class="col l1">
-      <a class="btn-floating btn-small waves-effect waves-light red" ui-sref="newcampaign"><i class="material-icons">add</i></a>
+    <div class="col s3">
+      <span>Create New Campaign</span>
+      <a class="btn-floating btn-small waves-effect waves-light red" ui-sref="newcampaign"><i class="material-icons">create</i></a>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-show="profile.projects">
     <ul class="collection" ng-repeat="project in profile.projects" ui-sref="campaignDetail({id: project.id})">
       <li class="collection-item avatar">
         <img src="{{project.img_url}}" alt="" class="circle">
@@ -36,9 +41,7 @@
         <p>{{project.status}} <br>
           {{project.date_exp}}
         </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">Grade</i></a>
       </li>
     </ul>
-  </div>
   </div>
 </div>

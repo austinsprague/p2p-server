@@ -12,20 +12,20 @@
     .module('campaignDetail')
     .controller('CampaignDetailCtrl', CampaignDetailCtrl);
 
-  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http, $cookies) {
+  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http) {
     var vm = this;
-    vm.ended = false;
-    vm.funded = false;
-    vm.sessionCookie= $cookies.get('session');
-    console.log(vm.sessionCookie);
-    console.log(atob(vm.sessionCookie));
-    console.log(JSON.parse(atob(vm.sessionCookie)));
     vm.campaignId = $stateParams.id;
-    vm.currentUserId = 1;
+    var currentUser = CampaignDetailService.getCurrentUser();
+    if (currentUser.id) {
+      vm.loggedin = true;
+      vm.currentUserId = currentUser.id;
+      vm.currentUserName = currentUser.display_name;
+    } else {
+      vm.loggedin = false;
+    }
 
     CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
       vm.projectById = data;
-      console.log(vm.projectById);
       vm.campaignUserId = data.user_id;
       vm.company_name = data.company_name;
       vm.img_url = data.img_url;
@@ -53,17 +53,22 @@
     })
 
     vm.createUserCharge = function(amount){
-      vm.userCharge = {};
-      vm.userCharge.backer_id = vm.currentUserId;
-      vm.userCharge.proj_id = vm.campaignId;
-      vm.userCharge.amount = amount;
-      vm.userCharge.user_id = vm.campaignUserId;
+      var token;
+      if (vm.loggedin && amount) {
+        vm.userCharge = {};
+        vm.userCharge.backer_id = vm.currentUserId;
+        vm.userCharge.proj_id = vm.campaignId;
+        vm.userCharge.amount = amount;
+        vm.userCharge.user_id = vm.campaignUserId;
 
-      $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
-      .then(function(user){
-        console.log('this is user', user);
-        $state.go('profile');
-      })
+        $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
+        .then(function(user){
+          $state.go('profile');
+        })
+      }
+      else {
+        alert('Please login or register to support this campaign')
+      }
     }
   }
 }());
