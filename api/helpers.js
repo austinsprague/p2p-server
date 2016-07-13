@@ -28,21 +28,6 @@ function stripeCharge(backer) {
   });
 }
 
-// function stripeCreateToken(){
-//   stripe.tokens.create({
-//     card: {
-//       "number": '4242424242424242',
-//       "exp_month": 12,
-//       "exp_year": 2017,
-//       "cvc": '123'
-//     }
-//   }, stripeResHandler)
-// }
-//
-// function stripeResHandler(status, res) {
-//   console.log(res);
-// }
-
 function stripeAcctRetrieve(data) {
   console.log('data', data);
   return new Promise(function(resolve, reject){

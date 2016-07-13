@@ -12,20 +12,13 @@
     .module('campaignDetail')
     .controller('CampaignDetailCtrl', CampaignDetailCtrl);
 
-  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http, $cookies) {
+  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http) {
     var vm = this;
-    vm.ended = false;
-    vm.funded = false;
-    vm.sessionCookie= $cookies.get('session');
-    console.log(vm.sessionCookie);
-    console.log(atob(vm.sessionCookie));
-    console.log(JSON.parse(atob(vm.sessionCookie)));
-    vm.campaignId = $stateParams.id;
-    vm.currentUserId = 1;
+    var campaignId = $stateParams.id;
+    var currentUserId = CampaignDetailService.getCurrentUser().id
 
-    CampaignDetailService.getProjectsById(vm.campaignId).then(function(data) {
+    CampaignDetailService.getProjectsById(campaignId).then(function(data) {
       vm.projectById = data;
-      console.log(vm.projectById);
       vm.campaignUserId = data.user_id;
       vm.company_name = data.company_name;
       vm.img_url = data.img_url;
@@ -44,7 +37,8 @@
         }
       }, vm.info);
     });
-    CampaignDetailService.getBackedInfo(vm.campaignId).then(function(data){
+
+    CampaignDetailService.getBackedInfo(campaignId).then(function(data){
       vm.backerCount = data.length;
       vm.amtPledged = 0;
       for (var i = 0; i < data.length; i++) {
@@ -53,19 +47,18 @@
     })
 
     vm.createUserCharge = function(amount){
-      vm.userCharge = {};
-      vm.userCharge.backer_id = vm.currentUserId;
-      vm.userCharge.proj_id = vm.campaignId;
-      vm.userCharge.amount = amount;
-      vm.userCharge.user_id = vm.campaignUserId;
+        vm.userCharge = {};
+        vm.userCharge.backer_id = currentUserId;
+        vm.userCharge.proj_id = campaignId;
+        vm.userCharge.amount = amount;
+        vm.userCharge.user_id = vm.campaignUserId;
 
-      $http.post('/api/user_projects/charge/' + vm.campaignId, vm.userCharge)
-      .then(function(user){
-        console.log('this is user', user);
-        $state.go('profile');
-      })
+        $http.post('/api/user_projects/charge/' + campaignId, vm.userCharge)
+        .then(function(user){
+          $state.go('profile');
+        })
+      }
     }
-  }
 }());
 
 //# sourceMappingURL=campaign-detail-controller.js.map

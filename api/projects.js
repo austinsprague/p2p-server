@@ -31,7 +31,7 @@ router.post('/insert/:id', function(req, res){
   queries.Projects().insert({
     company_name: req.body.company_name,
     user_id: req.params.id,
-    img_url: req.body.img_url,
+    img_url: req.body.img_url ,
     // desc: req.body.desc,
     category: req.body.category,
     // city: req.body.city,
