@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["nav/nav-module.js"],"sourcesContent":["(function () {\n  'use strict';\n\n  /* @ngdoc object\n   * @name nav\n   * @description\n   *\n   */\n  angular\n    .module('nav', [\n      'ui.router',\n      'ngCookies'\n    ]);\n}());\n"],"file":"nav/nav-module.js","sourceRoot":"/source/"}

@@ -12,13 +12,14 @@
     .module('campaignDetail')
     .controller('CampaignDetailCtrl', CampaignDetailCtrl);
 
-  function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http) {
+  function CampaignDetailCtrl($state, $stateParams, ProfileService, CampaignDetailService, $http) {
     var vm = this;
     var campaignId = $stateParams.id;
-    var currentUserId = 1;
+    // var currentUserId = 1;
+    var currentUserId;
     function getUser(){
-      if (CampaignDetailService.getCurrentUser()) {
-        currentUserId = CampaignDetailService.getCurrentUser().id
+      if (ProfileService.getCurrentUser()) {
+        currentUserId = ProfileService.getCurrentUser().id
       } else {
         return null;
       }

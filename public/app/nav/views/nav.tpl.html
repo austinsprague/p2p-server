@@ -1,0 +1,9 @@
+<nav class="white" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" href="#" class="blue-text"><img ng-src="./images/logo.png" alt="logo" style="max-height:80%;"/>Local + Addition</a>
+    <ul class="right hide-on-med-and-down ">
+        <li class="blue-text"><a href="/auth/stripe" class="blue-text" ng-hide="isLoggedIn()">Login | Register</a></li>
+        <li class="blue-text"><a class="blue-text" ng-show="isLoggedIn()" ui-sref="profile">{{userDisplayName}}</a></li>
+    </ul>
+  </div>
+</nav>

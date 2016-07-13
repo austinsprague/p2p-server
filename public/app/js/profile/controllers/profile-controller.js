@@ -14,7 +14,6 @@
 
   function ProfileCtrl($state, $stateParams, ProfileService) {
     var vm = this;
-    vm.currentUserId = 1;
     if (ProfileService.getCurrentUser()) {
       vm.currentUserId = ProfileService.getCurrentUser()
       vm.currentUserName = ProfileService.getCurrentUser().display_name;

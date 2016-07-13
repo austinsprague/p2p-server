@@ -92,6 +92,28 @@ exports.seed = function(knex, Promise) {
           uniq_comp:"Draft & bottled beers as well as a variety of wines by the glass are served. ",
           use_of_funds:"We are needing new signs paint",
           user_id:13
+        }, {
+          amt_req :2500,
+          category : "optical",
+          company_name : "4 Your Eyes Only Optical",
+          date_created : "",
+          date_exp : null,
+          desc :null,
+          history : "4 Your Eyes Only has been providing Seattle with inspiring eyeglasses since 1985",
+          id : 7,
+          idea_prob : null,
+          idea_sol : null,
+          img_url :"http://www.4youreyesonlyoptical.com/images/slider/woow_pink-yellow-blue.jpg",
+          neighborhood : "Wallingford",
+          pitch :"We're an eyewear boutique specializing in extraordinary eyeglasses from independent eyewear designers. Locally owned and operated, we curate an exclusive selection of designer eyewear that's sure to surprise.",
+          prod_feat : null,
+          prod_use_cases : null,
+          rec_stripe_cust_id : null,
+          status : "active",
+          targ_mkt : "all the visually impaired who want to rock great glasses",
+          uniq_comp :"4 Your Eyes Only specializes in hand-crafted designer eyeglass frames.",
+          use_of_funds : "We need to upgrade our record system so help schedule appointments.",
+          user_id : 7
         }])
       ]);
     });
