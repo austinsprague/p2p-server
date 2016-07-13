@@ -21,10 +21,8 @@
         return false;
       }
       var parsedCookie = JSON.parse(atob(sessionCookie));
-      console.log(parsedCookie);
-      console.log(parsedCookie.passport.user.id);
       $scope.loggedIn = true;
-      console.log('true');
+      console.log('loggedIn');
       $scope.userId = parsedCookie.passport.user.id;
       $scope.userDisplayName = parsedCookie.passport.user.display_name;
       return true;
