@@ -13,10 +13,10 @@
       </div>
       <div class="col l4">
         <ul class="collection with-header">
-          <li class="collection-header"><h4>{{campaignDetail.amtPledged}} Pledged</h4></li>
+          <li class="collection-header" ng-show="campaignDetail.amtPledged"><h4>$ {{campaignDetail.amtPledged}} pledged</h4></li>
           <li class="collection-item"><div>14 Days Left!</div></li>
-          <li class="collection-item"><div>{{campaignDetail.backerCount}} Backers</div></li>
-          <li class="collection-item"><div class="progress"><div class="determinate" style="width: 70%"></div></div></li>
+          <li class="collection-item"><div ng-pluralize count="campaignDetail.backerCount" when="{'1':'1 Backer','other': '{} Backers' }">{{campaignDetail.backerCount}} Backers</div></li>
+          <!-- <li class="collection-item"><div class="progress"><div class="determinate" style="width: 70%"></div></div></li> -->
         </ul>
         <div class="row">
           <form class="" method="post">
@@ -25,7 +25,7 @@
               <label for="amount">$ Pledge Amount</label>
             </div>
             <div class="col l6">
-              <a class="waves-effect orange btn-flat" ng-click="campaignDetail.createUserCharge(userCharge)" style="height:100%">Support</a>
+              <a class="waves-effect orange btn-flat" ng-click="campaignDetail.createUserCharge(amount)" style="height:100%">Support</a>
             </div>
           </form>
         </div>

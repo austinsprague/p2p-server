@@ -12,7 +12,7 @@
     .module('home')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl($state, $cookies, $http, $scope) {
+  function HomeCtrl($state, $cookies, $http) {
     var vm = this;
     var loggedin = true;
 

@@ -12,24 +12,23 @@
     .module('profile')
     .controller('ProfileCtrl', ProfileCtrl);
 
-  function ProfileCtrl($state, $stateParams, ProfileService, $cookies) {
+  function ProfileCtrl($state, $stateParams, ProfileService, $cookies, CampaignDetailService) {
     var vm = this;
-    console.log($cookies.get('kitty'));
-    var currentUserId = $cookies.get('kitty') || 1;
-    console.log(currentUserId);
+    var currentUser = CampaignDetailService.getCurrentUser();
+    vm.currentUserName = currentUser.display_name;
 
-    ProfileService.getUser(currentUserId).then(function(user){
+    ProfileService.getUser(currentUser.id).then(function(user){
       vm.user = user;
-      vm.display_name = user.display_name;
+      vm.display_name = user.display_name.replace(/_/g, " ");
     });
-    ProfileService.getProjects(currentUserId).then(function(projects){
+    ProfileService.getProjects(currentUser.id).then(function(projects){
       vm.projects = projects;
     });
-    ProfileService.getBackedProj(currentUserId).then(function(projects){
+    ProfileService.getBackedProj(currentUser.id).then(function(projects){
       vm.backedProj = projects;
     });
     vm.createCampaign = function(){
-      ProfileService.createCampaign(vm.proj, currentUserId);
+      ProfileService.createCampaign(vm.proj, currentUser.id);
       $state.go('profile');
     }
   }
