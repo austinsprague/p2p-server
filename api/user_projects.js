@@ -29,17 +29,18 @@ router.get('/backed/:id', function (req, res) {
 });
 
 router.post('/charge/:id', function (req, res) {
+  console.log('this is req', req.body);
   queries.UserProjBacked().insert({
-      charge_stripe_cust_id: req.body.backer_id,
+      backer_id: req.body.backer_id,
       proj_id: req.body.proj_id,
       amt_pledged: req.body.amount,
       user_id: req.body.user_id
   }).then(function(data){
     console.log(data);
     console.log('body is :', req.body);
-    return helpers.stripeCharge(req.body).then(function(data){
-      res.json('successful user backed');
-    })
+    // return helpers.stripeCharge(req.body).then(function(data){
+    //   res.json('successful user backed');
+    // })
     res.json(data);
   }).catch(function(err){
     res.json(err);

@@ -15,7 +15,15 @@
   function CampaignDetailCtrl($state, $stateParams, CampaignDetailService, $http) {
     var vm = this;
     var campaignId = $stateParams.id;
-    var currentUserId = CampaignDetailService.getCurrentUser().id
+    var currentUserId = 1;
+    function getUser(){
+      if (CampaignDetailService.getCurrentUser()) {
+        currentUserId = CampaignDetailService.getCurrentUser().id
+      } else {
+        return null;
+      }
+    }
+    console.log(currentUserId);
 
     CampaignDetailService.getProjectsById(campaignId).then(function(data) {
       vm.projectById = data;

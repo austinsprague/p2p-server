@@ -50,6 +50,9 @@
       },
       getCurrentUser: function() {
         var sessionCookie= $cookies.get('session');
+        if (sessionCookie == null || sessionCookie == undefined) {
+          return null;
+        }
         console.log('sessionCookie', sessionCookie);
         var parsedCookie = JSON.parse(atob(sessionCookie));
         console.log(parsedCookie);

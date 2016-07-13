@@ -12,23 +12,26 @@
     .module('profile')
     .controller('ProfileCtrl', ProfileCtrl);
 
-  function ProfileCtrl($state, $stateParams, ProfileService, $cookies, CampaignDetailService) {
+  function ProfileCtrl($state, $stateParams, ProfileService) {
     var vm = this;
-    var currentUser = CampaignDetailService.getCurrentUser();
-    vm.currentUserName = currentUser.display_name;
+    vm.currentUserId = 1;
+    if (ProfileService.getCurrentUser()) {
+      vm.currentUserId = ProfileService.getCurrentUser()
+      vm.currentUserName = ProfileService.getCurrentUser().display_name;
+    }
 
-    ProfileService.getUser(currentUser.id).then(function(user){
+    ProfileService.getUser(vm.currentUserId).then(function(user){
       vm.user = user;
       vm.display_name = user.display_name
     });
-    ProfileService.getProjects(currentUser.id).then(function(projects){
+    ProfileService.getProjects(vm.currentUserId).then(function(projects){
       vm.projects = projects;
     });
-    ProfileService.getBackedProj(currentUser.id).then(function(projects){
+    ProfileService.getBackedProj(vm.currentUserId).then(function(projects){
       vm.backedProj = projects;
     });
     vm.createCampaign = function(){
-      ProfileService.createCampaign(vm.proj, currentUser.id);
+      ProfileService.createCampaign(vm.proj, vm.currentUserId);
       $state.go('profile');
     }
   }

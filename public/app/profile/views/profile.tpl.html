@@ -7,13 +7,13 @@
     <a ui-sref="campaign">Browse Projects</a>
   <!-- </div> -->
   <div class="row" id="backed">
-    <div class="row" ng-show="profile.backedProj">
+    <div class="row">
       <h5>Campaigns you've backed!</h5>
     </div>
     <div class="row">
       <ul class="collection" ng-repeat="backedProj in profile.backedProj" ui-sref="campaignDetail({id: backedProj.id})">
         <li class="collection-item avatar">
-          <img src="{{backedProj.img_url}}" alt="" class="circle">
+          <img ng-src="{{backedProj.img_url}}" alt="" class="circle">
           <span class="companyName">{{backedProj.company_name}}</span>
           <p>${{backedProj.amt_pledged}} <br>
             {{backedProj.neighborhood}}
@@ -24,11 +24,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s9" ng-hide="profile.projects">
-      <h5>You have no active campaigns</h5>
-    </div>
     <div class="col s9">
-      <h5 ng-show="profile.projects">Active Campaigns</h5>
+      <h5>Active Campaigns</h5>
     </div>
     <div class="col s3">
       <span>Create New Campaign</span>
@@ -38,7 +35,7 @@
   <div class="row">
     <ul class="collection" ng-repeat="project in profile.projects" ui-sref="campaignDetail({id: project.id})">
       <li class="collection-item avatar">
-        <img src="{{project.img_url}}" alt="" class="circle">
+        <img ng-src="{{project.img_url}}" alt="" class="circle">
         <span class="companyName">{{project.company_name}}</span>
         <p>{{project.status}} <br>
           {{project.date_exp}}

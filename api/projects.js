@@ -27,25 +27,22 @@ router.get('/user/:id', function (req, res) {
 });
 
 router.post('/insert/:id', function(req, res){
-  console.log(req.body);
   queries.Projects().insert({
     company_name: req.body.company_name,
-    user_id: req.params.id,
-    img_url: req.body.img_url ,
-    // desc: req.body.desc,
+    user_id: req.user.id,
+    img_url: req.body.img_url,
     category: req.body.category,
-    // city: req.body.city,
     neighborhood: req.body.neighborhood,
     pitch: req.body.pitch,
     targ_mkt: req.body.targ_mkt,
     uniq_comp: req.body.uniq_comp,
     history: req.body.history,
     use_of_funds: req.body.use_of_funds,
-    date_created: req.body.date_created,
-    date_exp: req.body.date_exp,
+    date_created: '',
+    date_exp: '',
     status: 'active',
     date_created: '',
-    amt_req: 2500
+    amt_req: req.body.amt_req
   }).then(function(){
     console.log('successful insert');
     res.json('success');
