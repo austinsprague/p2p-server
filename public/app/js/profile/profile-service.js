@@ -33,9 +33,7 @@
         if (sessionCookie == null || sessionCookie == undefined) {
           return null;
         }
-        console.log('sessionCookie', sessionCookie);
         var parsedCookie = JSON.parse(atob(sessionCookie));
-        console.log(parsedCookie);
         console.log(parsedCookie.passport.user.id);
         return parsedCookie.passport.user.id;
       }

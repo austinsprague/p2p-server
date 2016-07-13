@@ -27,6 +27,7 @@ router.get('/user/:id', function (req, res) {
 });
 
 router.post('/insert/:id', function(req, res){
+  console.log(req.body);
   queries.Projects().insert({
     company_name: req.body.company_name,
     user_id: req.user.id,
